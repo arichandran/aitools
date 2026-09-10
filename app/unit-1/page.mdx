@@ -1,0 +1,351 @@
+import PyodideRunner from "@/components/PyodideRunner";
+import PromptSandbox from "@/components/PromptSandbox";
+
+# <a id="_Toc239677954"></a>UNIT 1: Introduction to AI and the AI Tools Landscape
+
+## <a id="_Toc239677955"></a>1\. Detailed Unit Content
+
+### <a id="_Toc239677956"></a>1\.1 What is AI, Machine Learning, and Generative AI?
+
+Artificial Intelligence \(AI\) is the broad field of computer science concerned with building systems that perform tasks which normally require human intelligence — understanding language, recognising images, making decisions, and solving problems\. Think of AI as the large umbrella term\.
+
+Machine Learning \(ML\) is a subset of AI\. Instead of a programmer writing explicit rules for every situation, an ML system is shown many examples \(data\) and learns the underlying pattern itself\. For instance, rather than hand\-coding rules to detect spam email, an ML model is trained on thousands of labelled spam and non\-spam emails and learns to distinguish them statistically\.
+
+Generative AI \(GenAI\) is a further subset of ML, built mostly on a type of neural network architecture called the Transformer\. Generative models don't just classify or predict a number — they generate new content: text, images, audio, video, or code, that did not exist before\. ChatGPT, Claude, Gemini, Midjourney and GitHub Copilot are all generative AI tools\.
+
+__Nested relationship:__
+
+AI ⊃ Machine Learning ⊃ Deep Learning ⊃ Generative AI\. Every generative AI tool is an ML system, but not every ML system is generative \(e\.g\., a spam filter classifies; it does not generate\)\.
+
+### <a id="_Toc239677957"></a>1\.2 Core Categories of AI Tools
+
+AI tools available today can be grouped into five broad categories, based on the primary type of task they perform:
+
+- __Conversational / Text tools — __general\-purpose chat assistants \(ChatGPT, Claude, Gemini, Perplexity\) that answer questions, write text, explain concepts, and reason over uploaded documents\.
+- __Code assistants — __tools that read, write, explain, and debug program code, either inside an editor \(GitHub Copilot, Cursor\) or as autonomous coding agents \(Claude Code\)\.
+- __Data\-analysis tools — __tools that accept a spreadsheet or dataset and answer natural\-language questions about it, producing statistics, tables, and charts\.
+- __Image\-generation tools — __tools that create original images or artwork from a text description \(Midjourney, DALL·E 3, Stable Diffusion\)\.
+- __Writing / productivity tools — __tools embedded into everyday workflows for grammar\-checking, slide generation, meeting summarisation, and task automation \(Grammarly, Gamma, Notion AI\)\.
+
+### <a id="_Toc239677958"></a>1\.3 How Large Language Models Process and Generate Responses \(Conceptual Overview\)
+
+A Large Language Model \(LLM\) is trained on enormous amounts of text collected from books, websites, and code repositories\. During training, the model learns statistical relationships between words and phrases — essentially, given a sequence of words, which word is most likely to come next\. It does this using a neural network architecture called the Transformer, whose key innovation is the 'attention mechanism', which lets the model weigh how strongly every word in a sentence relates to every other word, regardless of distance between them\.
+
+When you type a prompt, the model does not 'look up' an answer from a database\. It converts your text into numerical representations \(tokens and embeddings\), passes them through many layers of the network, and predicts the response one token \(roughly one word\-piece\) at a time, each new token conditioned on everything generated so far\. This is why LLMs can sometimes produce fluent but factually incorrect statements \(hallucinations\) — the model is optimising for statistically plausible language, not verified truth, unless it is explicitly connected to a search or retrieval tool\.
+
+__Key takeaway for students:__
+
+An LLM predicts the next most probable piece of text based on patterns learned during training\. It does not 'think' or 'know' facts the way a database does — this is exactly why Unit 5 dedicates a full section to hallucination and fact\-checking\.
+
+### <a id="_Toc239677959"></a>1\.4 Criteria for Selecting the Right AI Tool for a Task
+
+Not every AI tool is suited to every task\. Before choosing a tool, a good practitioner evaluates the task against four criteria:
+
+__Criterion__
+
+__Guiding Question__
+
+__Example__
+
+Accuracy needs
+
+How costly is a wrong answer?
+
+Medical or financial claims need a tool with citations \(e\.g\., Perplexity\) or human verification; casual brainstorming does not\.
+
+Cost
+
+Is a free tier sufficient, or is paid access needed for larger context, higher usage limits, or advanced models?
+
+A student drafting a report may use a free tier; a researcher processing a 200\-page PDF may need a paid plan\.
+
+Data sensitivity
+
+Does the task involve personal, institutional, or confidential data?
+
+Uploading student marksheets or Aadhaar\-linked data requires checking the tool's data\-retention and training\-use policy \(see DPDP Act, Unit 5\)\.
+
+Output format
+
+Does the task need prose, code, an image, a spreadsheet, or a slide deck?
+
+A code\-debugging task needs a coding assistant, not an image generator\.
+
+### <a id="_Toc239677960"></a>1\.5 Setting Up Accounts and Workspaces: Free\-Tier vs Paid\-Tier
+
+Most AI tools follow a 'freemium' model\. Understanding the difference matters for academic use:
+
+- __Free tier — __typically offers a smaller/older model, a message\-per\-day or per\-hour cap, limited file\-upload size, and shorter memory of the conversation \(context window\)\.
+- __Paid tier — __unlocks the most capable model, higher or unlimited usage, larger file uploads, priority access during peak load, and sometimes team/workspace features such as shared projects and admin controls\.
+- __Workspace/Project features — __many tools \(Claude, ChatGPT\) allow grouping related conversations and files into a 'Project', which is useful for a semester\-long assignment or a research literature review\.
+
+Students should always check that they are using an official account \(not a lookalike phishing site\), read the tool's terms of use before uploading any institutional document, and understand what happens to their data \(used for further model training, or not\) — this is elaborated further in Unit 5\.
+
+### <a id="_Toc239677961"></a>1\.6 Widely Used AI Tools by Application
+
+The table below \(from the syllabus\) summarises the tools most relevant for a first\-year engineering student and their typical use:
+
+__Category__
+
+__Example Tools__
+
+__Typical Application__
+
+Conversational / General\-Purpose AI
+
+ChatGPT, Claude, Gemini, Perplexity
+
+Writing, research, coding help, file/data analysis, cited web search
+
+AI Coding Assistants
+
+GitHub Copilot, Cursor, Claude Code
+
+In\-IDE code completion, AI\-native editing, multi\-file agentic coding
+
+Data Analysis Tools
+
+ChatGPT \(Advanced Data Analysis\), Microsoft Copilot in Excel, Julius AI
+
+Upload a dataset, generate statistics/charts, spreadsheet formulas via natural language
+
+Image Generation
+
+Midjourney, DALL·E 3, Stable Diffusion / Flux
+
+Illustrations, concept art, design mockups
+
+Writing & Productivity
+
+Grammarly, Gamma, Fathom, Notion AI
+
+Grammar/style checking, slide generation, meeting summaries, task automation
+
+Audio, Video & Presentation
+
+ElevenLabs, Runway/Sora, Synthesia
+
+Text\-to\-speech, AI video generation, script\-to\-video presentations
+
+## <a id="_Toc239677962"></a>2\. List of Experiments
+
+### <a id="_Toc239677963"></a>Experiment 1: Live Comparison — Same Query on Two Chatbots
+
+Task \(as given in syllabus\): Ask two different AI chatbots the same general engineering query — 'explain the engineering design process' — and compare their response style and accuracy\.
+
+<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+  <div style={{ flex: '1 1 300px' }}>
+    <PromptSandbox title="Prompt Sandbox (Chatbot A)" initialPrompt="Explain the engineering design process." />
+  </div>
+  <div style={{ flex: '1 1 300px' }}>
+    <PromptSandbox title="Prompt Sandbox (Chatbot B)" apiEndpoint="/api/chatbot-b" initialPrompt="Explain the engineering design process." />
+  </div>
+</div>
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Step 1 — Choose two tools with different underlying models, e\.g\., ChatGPT and Claude \(or Claude and Gemini\), so the comparison is meaningful\.
+
+Step 2 — Use the identical prompt, word for word, on both tools, to keep the comparison fair:
+
+Prompt used on both tools:
+
+"Explain the engineering design process\."
+
+Step 3 — Record and tabulate the two responses along agreed comparison dimensions:
+
+__Dimension__
+
+__Chatbot A \(e\.g\., ChatGPT\)__
+
+__Chatbot B \(e\.g\., Claude\)__
+
+Structure
+
+Typically returns a numbered list of 6\-8 stages \(define problem → research → brainstorm → design → prototype → test → iterate → communicate\)\.
+
+Often groups the same stages under fewer higher\-level headings with more connective explanation between stages\.
+
+Depth
+
+May include a short example \(e\.g\., designing a bridge\) if prompted generically\.
+
+May proactively ask a clarifying follow\-up question about which branch of engineering, or give a generic but slightly longer explanation\.
+
+Tone/Style
+
+Concise, bulleted, exam\-style\.
+
+More narrative and explanatory, sometimes with an analogy\.
+
+Accuracy
+
+Both should be broadly correct since 'engineering design process' is well\-documented, standard knowledge; check that no stage is invented or mislabelled\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- Identical\-prompt comparison isolates the model's behaviour as the only variable, which is the core idea of controlled comparison\.
+- Response style differences arise because each provider fine\-tunes its model differently, even though all are built on similar Transformer foundations\.
+- Accuracy checking here is easy because engineering design process is standard, verifiable textbook knowledge — a good first exercise before tackling ambiguous topics\.
+
+<details>
+
+<summary><b>Expected Output / Result</b></summary>
+
+
+A short comparison note \(a paragraph or table, as shown above\) stating which chatbot gave a more classroom\-usable answer and why, e\.g\., 'Chatbot B's answer was more thorough but Chatbot A's numbered format is easier to copy into lab notebooks\.'
+
+
+
+</details>
+
+### <a id="_Toc239677964"></a>Experiment 2: Walkthrough of an AI Tool's Interface
+
+Task: Walk through an AI tool's interface — settings, conversation history, file upload, and model selection — using a common platform \(e\.g\., Claude\.ai or ChatGPT\)\.
+
+<details>
+
+<summary><b>Worked Solution — Step-by-Step Interface Tour</b></summary>
+
+
+1. Sign\-in and workspace: Log in with an institutional or personal email\. Note the left sidebar, which lists past conversations grouped by recency \(Today, Yesterday, Previous 7 days\)\.
+2. Starting a new chat: Click 'New Chat'\. Explain that each chat keeps its own memory/context; switching chats does not carry information over unless a 'Projects' or 'memory' feature is explicitly enabled\.
+3. Model selection: Locate the model\-picker dropdown \(e\.g\., choosing between a faster/lighter model and a more capable one\)\. Explain the trade\-off: lighter models respond faster and may have lower usage cost, while larger models handle more complex reasoning\.
+4. File upload: Click the attachment/paperclip icon and upload a sample PDF or image\. Show how the tool acknowledges the file and can now answer questions about its content\.
+5. Settings: Open Settings and show options such as response style/tone, appearance \(light/dark\), data controls \(whether conversations may be used to improve the model\), and connected apps/tools\.
+6. Conversation history and search: Demonstrate searching past conversations by keyword, renaming a chat, and deleting a chat\.
+7. Exporting/sharing: Show how to copy a response, export a conversation, or share a link \(where supported\)\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- Session/context boundaries: understanding that a 'chat' is the unit of memory helps students avoid the common confusion of expecting one chat to 'remember' facts from an unrelated chat\.
+- Model tiers: recognising that 'bigger model' generally means better reasoning but slower/costlier response, connecting back to Section 1\.4's selection criteria\.
+- Data controls: locating the privacy/data setting previews the ethics discussion in Unit 5\.
+
+<details>
+
+<summary><b>Expected Output / Result</b></summary>
+
+
+Students should be able to independently open any similar chat\-based AI tool and locate: where to start a new conversation, where to change the model, where to upload a file, and where to check data\-privacy settings — without needing a demonstration a second time\.
+
+
+
+</details>
+
+### <a id="_Toc239677965"></a>Experiment 3: Create Accounts on Two AI Platforms and Compare Responses
+
+Problem: Create accounts on two AI platforms and compare their responses to a simple engineering question \(e\.g\., 'explain the difference between analysis and design'\)\.
+
+__*Step\-by\-Step Solution*__
+
+1. Register for two platforms, e\.g\., Claude\.ai and ChatGPT, using an institutional or personal email; verify the account via the confirmation link/OTP\.
+2. Open a new chat on each and enter the identical prompt: "Explain the difference between analysis and design in engineering\."
+3. Record both responses in full\.
+4. Compare on three axes: \(a\) correctness — does each response correctly state that analysis investigates/evaluates an existing or proposed system's behaviour, while design creates/synthesises a new system to meet requirements; \(b\) clarity — is the explanation understandable to a first\-year student; \(c\) examples given — does the tool illustrate with a concrete example \(e\.g\., analysing the stress in an existing beam vs designing a new beam\)\.
+
+__*Explanation of Approach*__
+
+The exercise trains the core research skill of triangulation — never trusting a single AI response at face value\. By comparing two independent tools' answers to the same well\-defined academic question, a student can identify where both agree \(likely reliable, foundational knowledge\) and where they diverge \(needs further verification from a textbook\)\.
+
+__*Sample Answer Content \(for grading reference\)*__
+
+Both quality responses should converge on: Analysis = studying/evaluating something that already exists or has been proposed, to predict or verify its behaviour \(e\.g\., calculating the maximum load a beam can bear\)\. Design = the creative, synthesis process of proposing a new solution that satisfies given requirements and constraints \(e\.g\., choosing the beam's material, shape, and dimensions to safely carry a specified load\)\. A model answer explicitly connects the two: 'analysis' is often used as a step within the 'design' process, to verify that a proposed design will work\.
+
+<br/>
+<div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+  <div style={{ flex: '1 1 300px' }}>
+    <PromptSandbox title="Platform A Response" initialPrompt="Explain the difference between analysis and design in engineering." />
+  </div>
+  <div style={{ flex: '1 1 300px' }}>
+    <PromptSandbox title="Platform B Response" apiEndpoint="/api/chatbot-b" initialPrompt="Explain the difference between analysis and design in engineering." />
+  </div>
+</div>
+
+### <a id="_Toc239677966"></a>Experiment 4: One\-Page Comparison Chart of Five AI Tools
+
+Problem: Prepare a one\-page comparison chart of five AI tools by category and primary use case\.
+
+__*Step\-by\-Step Solution*__
+
+Select one representative tool from five different categories \(avoid picking two conversational tools, since the goal is category breadth\) and tabulate:
+
+__Tool__
+
+__Category__
+
+__Primary Use Case__
+
+__Free Tier?__
+
+Claude
+
+Conversational / General\-Purpose
+
+Writing, research, reasoning over documents, coding help
+
+Yes, with daily message limits
+
+GitHub Copilot
+
+AI Coding Assistant
+
+In\-editor code completion and suggestion while programming
+
+Free for verified students \(GitHub Student Pack\)
+
+Microsoft Copilot in Excel
+
+Data Analysis
+
+Natural\-language spreadsheet formulas, summarisation of tabular data
+
+Included with eligible Microsoft 365 subscription
+
+DALL·E 3
+
+Image Generation
+
+Generating illustrations/concept art from text prompts
+
+Limited free credits via Bing/ChatGPT
+
+Notion AI
+
+Writing & Productivity
+
+Summarising notes, drafting content, task/database automation inside Notion
+
+Trial credits, then paid add\-on
+
+__*Explanation of Approach*__
+
+The exercise reinforces Section 1\.2's taxonomy by requiring the student to actively map real tools onto categories rather than passively read the syllabus table\. Choosing one tool per category \(instead of ranking similar tools\) demonstrates understanding of what differentiates the categories\.
+
+### <a id="_Toc239677967"></a>Experiment 5: Reflection on One Task in Daily Academic Life
+
+Problem: Write a short reflection identifying one task in your daily academic life where an AI tool could help\.
+
+__*Step\-by\-Step Solution / Model Reflection*__
+
+A strong reflection follows a simple three\-part structure: \(1\) name the task, \(2\) name the tool and how it would be used, \(3\) state the expected benefit and one caution\.
+
+__Model Answer:__
+
+"Every week I need to convert my rough, handwritten lecture notes into a clean, organised summary before an exam\. I could photograph my notes and upload the image to a conversational AI tool such as Claude, asking it to transcribe and reorganise the content into a structured outline with headings\. This would save me roughly an hour per subject each week\. However, I must still verify the transcription against my original notes, since the tool could misread my handwriting or omit a step in a derivation, so I would not submit the AI\-cleaned notes to a professor without checking them myself\."
+
+__*Explanation of Approach*__
+
+This exercise builds the habit of critically pairing every proposed AI use with a stated verification step — directly previewing the reliability and academic\-integrity themes formalised in Unit 5\.
+

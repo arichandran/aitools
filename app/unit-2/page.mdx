@@ -1,0 +1,369 @@
+import PyodideRunner from "@/components/PyodideRunner";
+import PromptSandbox from "@/components/PromptSandbox";
+
+# <a id="_Toc239677968"></a>UNIT 2: Prompt Engineering and Generative AI Tools
+
+## <a id="_Toc239677969"></a>1\. Detailed Unit Content
+
+### <a id="_Toc239677970"></a>2\.1 Anatomy of a Good Prompt
+
+A prompt is the instruction a user gives to a generative AI model\. Because LLMs generate text by predicting the most statistically plausible continuation \(see Unit 1, Section 1\.3\), the quality and specificity of the prompt directly shapes the quality of the output — this discipline is called prompt engineering\. A well\-formed prompt typically contains four components:
+
+__Component__
+
+__Purpose__
+
+__Example__
+
+Context
+
+Gives the model background it needs to tailor the answer\.
+
+"I am a first\-year B\.Tech CSE student preparing for a viva\."
+
+Clear instruction
+
+States exactly what action the model should perform\.
+
+"Explain binary search and its time complexity\."
+
+Desired format
+
+Specifies how the answer should be structured\.
+
+"Answer in 5 bullet points, each under 20 words\."
+
+Constraints
+
+Limits scope, length, tone, or excluded content\.
+
+"Do not use any mathematical notation; use plain English only\."
+
+Combining all four into a single prompt produces dramatically better output than a bare instruction alone\. Compare: 'Explain project scheduling' \(vague\) versus 'As a project\-management tutor, explain project scheduling to a first\-year engineering student in 4 bullet points, using a simple campus\-event example, avoiding technical jargon' \(well\-formed\)\.
+
+### <a id="_Toc239677971"></a>2\.2 Zero\-Shot, Few\-Shot, and Chain\-of\-Thought Prompting
+
+- __Zero\-shot prompting — __asking the model to perform a task with no examples provided, relying entirely on its pre\-trained knowledge\. Best for common, well\-defined tasks \(e\.g\., 'Translate this sentence to Hindi'\)\.
+- __Few\-shot prompting — __providing the model with a small number \(typically 1\-5\) of example input\-output pairs before the actual task, so the model infers the desired pattern or format\. Best when the desired output has a specific, non\-obvious structure \(e\.g\., a custom table layout, a particular tone\)\.
+- __Chain\-of\-thought \(CoT\) prompting — __explicitly instructing the model to reason step by step before giving a final answer \(e\.g\., 'think through this step by step'\)\. This is best for multi\-step numerical, logical, or diagnostic problems, since it reduces the chance the model jumps to an unverified conclusion\.
+
+Zero\-shot example:
+
+  "What is 15% of 240?"
+
+ 
+
+Few\-shot example:
+
+  "Convert the following into a formal tone:
+
+   Input: 'hey can u send the file' \-> Output: 'Could you please share the file?'
+
+   Input: 'wanna meet tmrw?' \-> Output: 'Would you be available to meet tomorrow?'
+
+   Input: 'the report is late again' \-> Output: ?"
+
+ 
+
+Chain\-of\-thought example:
+
+  "A tank fills at 12 litres/min and drains at 4 litres/min simultaneously\.
+
+   How long to fill a 480\-litre tank? Think step by step before answering\."
+
+### <a id="_Toc239677972"></a>2\.3 Role\-Based and Context\-Setting Prompts
+
+A role\-based prompt asks the AI to adopt a persona or professional stance before answering — e\.g\., 'Respond as a strict viva examiner', 'Act as a senior software engineer reviewing my code', or 'You are a patient tutor explaining this to a beginner'\. This technique works because it narrows the space of plausible continuations toward the tone, vocabulary, and priorities associated with that role in the model's training data\. Context\-setting prompts similarly narrow the answer by describing the situation \(audience, purpose, prior knowledge level\) even without an explicit persona\.
+
+__Caution:__
+
+A role\-based prompt changes tone and framing, but it does not grant the model new factual knowledge or guarantee accuracy — a model asked to 'act as a doctor' is still an LLM predicting plausible text, not a licensed physician\. Output must still be verified \(see Unit 5\)\.
+
+### <a id="_Toc239677973"></a>2\.4 Iterative Prompt Refinement
+
+Rarely does the first prompt produce the ideal answer\. Iterative refinement is the practice of diagnosing what is wrong with a response \(too vague, wrong format, missing an aspect, wrong tone, factually shaky\) and rewriting the prompt to fix that specific issue, one change at a time, so the student learns which prompt element caused which improvement\.
+
+1. Send an initial, simple prompt and read the response critically\.
+2. Identify the single biggest gap \(e\.g\., 'too long', 'not enough examples', 'wrong audience level'\)\.
+3. Add ONE constraint or clarification addressing that gap\.
+4. Re\-run and compare\. Repeat until the output meets requirements\.
+
+### <a id="_Toc239677974"></a>2\.5 Using Generative AI for Brainstorming, Summarising, and Drafting
+
+Beyond question\-answering, generative AI is widely used for three everyday academic tasks:
+
+- __Brainstorming — __generating a wide list of candidate ideas \(project topics, seminar titles, test cases\) which the student then filters and refines; the AI's role is breadth, not final judgement\.
+- __Summarising — __condensing a long article, chapter, or transcript into key points, always followed by a manual check against the original source for accuracy\.
+- __Drafting — __producing a first version of a report, email, or slide outline that the student edits for accuracy, tone, and originality before submission\.
+
+## <a id="_Toc239677975"></a>2\. List of Experiments
+
+### <a id="_Toc239677976"></a>Experiment 1: Refining a Vague Prompt Step by Step
+
+Task: Refine a vague prompt \(e\.g\., 'explain project scheduling'\) into a precise one step\-by\-step, showing output improvement at each stage\.
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Stage 0 \(vague prompt\):
+
+"Explain project scheduling\."
+
+Typical output: a generic, encyclopedia\-style paragraph covering definitions \(Gantt charts, milestones, critical path\) with no clear audience or length, often too advanced or too shallow for the actual need\.
+
+Stage 1 — add context and audience:
+
+"Explain project scheduling to a first\-year B\.Tech student who has never managed a project before\."
+
+Improvement: the tone simplifies, jargon reduces, and basic terms get defined inline\.
+
+Stage 2 — add desired format:
+
+"Explain project scheduling to a first\-year B\.Tech student, in 5 bullet points, each 1\-2 sentences long\."
+
+Improvement: output becomes scannable and exam\-note\-friendly instead of a dense paragraph\.
+
+Stage 3 — add a concrete relatable example \(constraint\):
+
+"Explain project scheduling to a first\-year B\.Tech student, in 5 bullet points \(1\-2 sentences each\), using the example of organising a college technical fest\."
+
+Improvement: abstract terms like 'milestone' and 'critical path' now map onto tangible fest tasks \(booking the auditorium, printing banners, final rehearsal\), making the concept concrete and memorable\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- Each stage changes exactly one prompt element \(context, then format, then example/constraint\), which is the correct way to teach cause\-and\-effect in prompting\.
+- The final Stage 3 prompt combines all four components from Section 2\.1: context \(first\-year student\), instruction \(explain project scheduling\), format \(5 bullets\), and constraint \(use fest example\)\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+A short table or sequence \(as shown above\) with the prompt at each stage and a one\-line note on what improved, demonstrating the value of iterative refinement \(Section 2\.4\) in practice\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox title="Stage 0: Vague Prompt" initialPrompt="Explain project scheduling." />
+<PromptSandbox title="Stage 1: Add Context" initialPrompt="Explain project scheduling to a first-year B.Tech student who has never managed a project before." />
+<PromptSandbox title="Stage 2: Add Format" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points, each 1-2 sentences long." />
+<PromptSandbox title="Stage 3: Add Example (Final)" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points (1-2 sentences each), using the example of organising a college technical fest." />
+
+### <a id="_Toc239677977"></a>Experiment 2: Few\-Shot Prompting for a Specific Output Format
+
+Task: Demonstrate few\-shot prompting by providing examples to guide the AI toward a specific output format \(e\.g\., a formatted comparison table\)\.
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Goal: get the AI to always answer 'compare X and Y' questions using a strict two\-column table with exactly three rows \(Definition, Example, Key Difference\) — a format not the model's default\.
+
+Few\-shot prompt:
+
+"Answer every comparison question using exactly this table format:
+
+ 
+
+ | Aspect | Item 1 | Item 2 |
+
+ |\-\-\-\-\-\-\-\-|\-\-\-\-\-\-\-\-|\-\-\-\-\-\-\-\-|
+
+ | Definition | \.\.\. | \.\.\. |
+
+ | Example | \.\.\. | \.\.\. |
+
+ | Key Difference | \.\.\. \(state once, spanning both\) |
+
+ 
+
+Example 1:
+
+Q: Compare RAM and ROM\.
+
+ | Aspect | RAM | ROM |
+
+ |\-\-\-\-\-\-\-\-|\-\-\-\-\-|\-\-\-\-\-|
+
+ | Definition | Volatile memory used for active processes | Non\-volatile memory storing permanent instructions |
+
+ | Example | System memory \(8GB/16GB\) | BIOS firmware |
+
+ | Key Difference | RAM loses data on power\-off; ROM retains it |
+
+ 
+
+Now answer:
+
+Q: Compare compilers and interpreters\."
+
+Because exactly one worked example is given before the real question, the model has enough signal to reproduce the same table shape, row labels, and level of brevity for the new topic \(compilers vs interpreters\), rather than reverting to a free\-form paragraph\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- One\-shot/few\-shot examples act as a template the model pattern\-matches against, illustrating Section 2\.2's claim that few\-shot prompting is best when a specific, non\-obvious structure is required\.
+- The example itself must be fully correct and well\-formatted, since the model will copy its style faithfully, including any errors\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+A correctly filled 3\-row comparison table for 'compilers vs interpreters', following the exact row labels and format demonstrated in the example — e\.g\., Definition: a compiler translates the whole program before execution, while an interpreter translates and executes line by line; Example: GCC \(compiler\) vs Python's default CPython interpreter; Key Difference: compiled programs run faster after translation, interpreted programs are easier to debug interactively\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox title="Few-Shot Prompt" initialPrompt={`Answer every comparison question using exactly this table format:
+
+ | Aspect | Item 1 | Item 2 |
+ |--------|--------|--------|
+ | Definition | ... | ... |
+ | Example | ... | ... |
+ | Key Difference | ... (state once) |
+
+Example:
+Q: Compare RAM and ROM.
+ | Aspect | RAM | ROM |
+ |--------|-----|-----|
+ | Definition | Volatile memory for active processes | Non-volatile memory for permanent instructions |
+ | Example | System memory (8GB/16GB) | BIOS firmware |
+ | Key Difference | RAM loses data on power-off; ROM retains it |
+
+Now answer:
+Q: Compare compilers and interpreters.`} />
+
+### <a id="_Toc239677978"></a>Experiment 3: Three Prompt Versions for the Same Task
+
+Problem: Write three versions of a prompt \(basic, detailed, role\-based\) for the same task and compare outputs\.
+
+__*Step\-by\-Step Solution*__
+
+Chosen task: explaining recursion in programming\.
+
+__Version__
+
+__Prompt__
+
+__Expected Effect on Output__
+
+Basic
+
+"What is recursion?"
+
+Generic textbook\-style definition, may include a simple factorial example, moderate length, no guarantee of simplicity\.
+
+Detailed
+
+"Explain recursion in programming to a first\-year student, in under 100 words, using the factorial function as the example, and explicitly state the base case and recursive case\."
+
+Tightly scoped, correctly structured \(base case \+ recursive case explicitly labelled\), respects the word limit\.
+
+Role\-based
+
+"You are a friendly senior student mentoring a junior before their first programming exam\. Explain recursion using an analogy from daily life, avoiding code entirely\."
+
+Warmer tone, likely uses an analogy \(e\.g\., nested dolls, mirrors facing each other, or a person looking up a word in the dictionary that refers to another word\), no code shown\.
+
+<br/>
+<PromptSandbox initialPrompt="What is recursion?" />
+<PromptSandbox initialPrompt="Explain recursion in programming to a first-year student, in under 100 words, using the factorial function as the example, and explicitly state the base case and recursive case." />
+<PromptSandbox initialPrompt="You are a friendly senior student mentoring a junior before their first programming exam. Explain recursion using an analogy from daily life, avoiding code entirely." />
+
+__*Explanation of Approach*__
+
+Holding the topic constant while varying only the prompt style isolates exactly how each of the three techniques from Sections 2\.1 and 2\.3 changes the response — students should note that the 'detailed' version is most reliable for exam preparation \(precise, complete\), while the 'role\-based' version is most useful for building intuition \(memorable, but less formally precise\)\.
+
+<a id="_Toc239677979"></a>
+
+### Experiment 4: Summarise a One\-Page Article and Verify
+
+Problem: Use an AI tool to summarise a one\-page technical article and verify the summary against the original\.
+
+__*Step\-by\-Step Solution*__
+
+1. Select or upload a one\-page technical article \(e\.g\., an IEEE Spectrum article on a new battery technology\)\.
+2. Prompt: "Summarise this article in 5 bullet points, preserving all numerical figures exactly as stated, and do not add any information not present in the text\."
+3. Read the AI\-generated summary and cross\-check every bullet point, sentence by sentence, against the original article\.
+4. Flag and correct any discrepancy — a common issue is the AI rounding or slightly misstating a number, or generalising a claim the article stated conditionally\.
+
+__*Explanation of Approach*__
+
+This exercise operationalises the 'trust but verify' principle: an AI summary is a helpful first draft, but the student remains responsible for its factual fidelity, especially for numbers, names, and dates, which LLMs can subtly alter even while sounding fluent and confident\.
+
+__Alternative approach:__
+
+For longer or more technical articles, ask the AI to summarise section\-by\-section rather than the whole document at once — this reduces the chance of it skipping or compressing an important sub\-point, and makes verification easier because each summary bullet maps to one specific paragraph\.
+
+<br/>
+<PromptSandbox initialPrompt="Summarise this article in 5 bullet points, preserving all numerical figures exactly as stated, and do not add any information not present in the text:\n\n[Paste your article text here]" />
+
+### <a id="_Toc239677980"></a>
+
+### Experiment 5: Chain\-of\-Thought Prompt for a Multi\-Step Problem
+
+Problem: Draft a chain\-of\-thought prompt to solve a multi\-step numerical/logical problem \(e\.g\., a unit\-conversion or estimation problem\) and check the reasoning\.
+
+__*Step\-by\-Step Solution*__
+
+Chosen problem: A car travels 180 km in 2 hours 30 minutes, then a further 96 km in 1 hour 20 minutes\. What is its average speed for the entire journey, in km/h?
+
+Chain\-of\-thought prompt:
+
+"Solve this step by step, showing each calculation before giving the final answer:
+
+A car travels 180 km in 2 hours 30 minutes, then a further 96 km in 1 hour 20 minutes\.
+
+What is its average speed for the entire journey, in km/h?"
+
+Expected reasoning chain the AI should produce:
+
+1. Convert both times to hours: 2h 30min = 2\.5 h; 1h 20min = 1\.333 h\.
+2. Total distance = 180 \+ 96 = 276 km\.
+3. Total time = 2\.5 \+ 1\.333 = 3\.833 h\.
+4. Average speed = total distance ÷ total time = 276 ÷ 3\.833 ≈ 72 km/h\.
+
+__*Explanation of Approach and Verification*__
+
+The student must independently redo the arithmetic \(as shown above\) rather than trust the final number outright — this is the entire point of chain\-of\-thought prompting: it exposes every intermediate step so an error \(e\.g\., mis\-converting minutes to a decimal fraction of an hour\) can be caught, instead of being hidden inside a single unexplained final answer\.
+
+__*Alternative Method*__
+
+A student can cross\-verify by computing average speed using the harmonic\-mean\-style check per leg \(Leg 1 speed = 180/2\.5 = 72 km/h; Leg 2 speed = 96/1\.333 = 72 km/h\) — since both legs happen to give the same 72 km/h, the overall average must also be 72 km/h, which independently confirms the chain\-of\-thought result\.
+
+<br/>
+<PromptSandbox initialPrompt="Solve this step by step, showing each calculation before giving the final answer:\n\nA car travels 180 km in 2 hours 30 minutes, then a further 96 km in 1 hour 20 minutes. What is its average speed for the entire journey, in km/h?" />
+
+<br/>
+<PyodideRunner initialCode={`# Verify the chain-of-thought arithmetic from Experiment 5
+leg1_dist = 180  # km
+leg1_time = 2 + 30/60  # hours
+
+leg2_dist = 96  # km
+leg2_time = 1 + 20/60  # hours
+
+total_dist = leg1_dist + leg2_dist
+total_time = leg1_time + leg2_time
+avg_speed = total_dist / total_time
+
+print(f"Leg 1: {leg1_dist} km in {leg1_time:.3f} h → {leg1_dist/leg1_time:.1f} km/h")
+print(f"Leg 2: {leg2_dist} km in {leg2_time:.3f} h → {leg2_dist/leg2_time:.1f} km/h")
+print(f"Total distance: {total_dist} km")
+print(f"Total time: {total_time:.3f} h")
+print(f"Average speed: {avg_speed:.1f} km/h")`} />
+

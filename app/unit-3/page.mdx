@@ -1,0 +1,462 @@
+import PyodideRunner from "@/components/PyodideRunner";
+import PromptSandbox from "@/components/PromptSandbox";
+
+# <a id="_Toc239677981"></a>UNIT 3: AI Tools for Data Analysis and Visualization
+
+## <a id="_Toc239677982"></a>1\. Detailed Unit Content
+
+### <a id="_Toc239677983"></a>3\.1 AI\-Assisted Spreadsheet and Dataset Analysis Using Natural Language
+
+Traditionally, analysing a dataset required knowing spreadsheet formulas \(VLOOKUP, PIVOT TABLE\) or a programming language \(Python/pandas, R\)\. AI\-assisted data\-analysis tools \(ChatGPT's Advanced Data Analysis / Code Interpreter, Microsoft Copilot in Excel, Julius AI\) remove this barrier: a user uploads a file \(\.csv, \.xlsx\) and asks questions in plain English, such as 'What is the average marks per section?' The tool internally writes and runs code \(typically Python\) to compute the answer, then explains the result in natural language — combining the rigor of programmatic computation with the accessibility of conversational interaction\.
+
+### <a id="_Toc239677984"></a>3\.2 Natural\-Language Querying of Datasets
+
+A natural\-language query is a plain\-English question about the data rather than a formula\. Effective queries are specific about the column names, the aggregation required \(sum, average, count, maximum\), and any filter conditions\. Compare a vague query \('tell me about this data'\) with a precise one \('What is the average attendance percentage for students in Section B, and how many students in that section have attendance below 75%?'\) — the precise query yields a directly usable, checkable answer\.
+
+### <a id="_Toc239677985"></a>3\.3 AI Tools for Generating Charts and Visual Summaries
+
+Once a dataset is uploaded, most AI data\-analysis tools can generate a chart on request — e\.g\., 'plot a bar chart of average marks by subject' or 'show a pie chart of pass vs fail counts'\. Choosing the right chart type matters for correct interpretation:
+
+__Chart Type__
+
+__Best Used For__
+
+__Avoid When__
+
+Bar chart
+
+Comparing a numeric value across discrete categories \(e\.g\., average marks per subject\)
+
+Showing change over continuous time \(use a line chart instead\)
+
+Line chart
+
+Showing a trend over an ordered sequence, typically time \(e\.g\., attendance over weeks\)
+
+Comparing unrelated categories with no natural order
+
+Pie chart
+
+Showing proportion of a whole, with very few categories \(2\-5\)
+
+More than 5\-6 categories, or when precise comparison between two similar\-sized slices matters \(bar chart reads more accurately\)
+
+Scatter plot
+
+Showing the relationship/correlation between two numeric variables \(e\.g\., study hours vs marks\)
+
+Categorical data with no continuous numeric pairing
+
+### <a id="_Toc239677986"></a>3\.4 Interpreting AI\-Generated Statistical Summaries Correctly
+
+An AI tool can compute mean, median, mode, standard deviation, and correlation instantly, but interpreting what these numbers mean is the student's responsibility\. Some recurring pitfalls:
+
+- __Mean vs median — __a single very high or very low value \(an outlier\) can pull the mean away from what is 'typical'; the median is more robust to outliers\. An AI summary that reports only the mean can be misleading for skewed data \(e\.g\., salary data with one extremely high earner\)\.
+- __Correlation vs causation — __an AI noting that two variables are correlated \(e\.g\., ice\-cream sales and drowning incidents both rise in summer\) does not mean one causes the other; a third factor \(hot weather\) may explain both\.
+- __Sample size — __a statistic computed from very few rows \(e\.g\., 5 students\) is far less reliable than one from hundreds of rows, even if the AI reports both with the same confident tone\.
+
+### <a id="_Toc239677987"></a>3\.5 Identifying and Correcting Errors in AI\-Generated Data Analysis
+
+AI data\-analysis tools make a specific, well\-documented category of mistake: misinterpreting a column's data type\. For example, a 'Roll Number' or 'Pincode' column contains digits but is categorical/identifier data, not something that should be averaged or summed\. Similarly, a date column stored as text \(e\.g\., '01\-02\-2026'\) may be misread as day\-first or month\-first depending on locale assumptions\. Detecting and correcting such errors requires the student to inspect a few raw rows of the actual dataset and sanity\-check any AI\-reported statistic against them\.
+
+__Rule of thumb:__
+
+Never accept a statistic on a column without first confirming what that column represents\. If an AI tool reports the 'average' of a Roll Number column, that is an immediate red flag that it has treated an identifier as a quantity\.
+
+### <a id="_Toc239677988"></a>2\. List of Experiments
+
+### <a id="_Toc239677989"></a>Experiment 1: Summary Statistics Report and Chart from a Small Dataset
+
+Task: Upload a small dataset \(e\.g\., class attendance or survey data\) to an AI tool and generate a summary\-statistics report and chart using natural\-language commands\.
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Sample dataset \(class attendance, 10 students, in %\):
+
+__Student__
+
+__Section__
+
+__Attendance %__
+
+S1
+
+A
+
+92
+
+S2
+
+A
+
+78
+
+S3
+
+A
+
+65
+
+S4
+
+A
+
+88
+
+S5
+
+A
+
+95
+
+S6
+
+B
+
+70
+
+S7
+
+B
+
+82
+
+S8
+
+B
+
+60
+
+S9
+
+B
+
+91
+
+S10
+
+B
+
+74
+
+Natural\-language command given to the AI tool:
+
+"Using this attendance dataset, report the mean, median, and minimum attendance for each section, and identify any student below 75% attendance\. Then create a bar chart of average attendance by section\."
+
+Worked calculation \(so the instructor/student can verify the AI's output manually\):
+
+Section A: values = 92, 78, 65, 88, 95\. Mean = \(92\+78\+65\+88\+95\)/5 = 418/5 = 83\.6\. Sorted = 65,78,88,92,95 → Median = 88\. Minimum = 65\.
+
+Section B: values = 70, 82, 60, 91, 74\. Mean = \(70\+82\+60\+91\+74\)/5 = 377/5 = 75\.4\. Sorted = 60,70,74,82,91 → Median = 74\. Minimum = 60\.
+
+Students below 75%: S3 \(65, Section A\), S6 \(70, Section B\), S8 \(60, Section B\), S10 \(74, Section B\)\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- Natural\-language querying \(Section 3\.2\) with a compound instruction: statistics \+ a filter condition \+ a chart request, all in one prompt\.
+- Choosing a bar chart \(Section 3\.3\) is correct here because we are comparing a numeric average across two discrete categories \(Section A vs B\), not a trend over time\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+A short table \(Mean, Median, Minimum per section, matching the manual calculation above\), a list of the four below\-75% students, and a two\-bar chart showing Section A's average \(83\.6%\) taller than Section B's average \(75\.4%\)\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox initialPrompt="Using this attendance dataset, report the mean, median, and minimum attendance for each section, and identify any student below 75% attendance:\n\nSection A: S1=92%, S2=78%, S3=65%, S4=88%, S5=95%\nSection B: S6=70%, S7=82%, S8=60%, S9=91%, S10=74%" />
+
+<br/>
+<PyodideRunner initialCode={`import statistics
+
+section_a = [92, 78, 65, 88, 95]
+section_b = [70, 82, 60, 91, 74]
+
+for name, data in [("Section A", section_a), ("Section B", section_b)]:
+    print(f"{name}:")
+    print(f"  Mean   = {statistics.mean(data):.1f}%")
+    print(f"  Median = {statistics.median(data):.1f}%")
+    print(f"  Min    = {min(data)}%")
+
+print("\nStudents below 75% attendance:")
+all_students = {"S1":92,"S2":78,"S3":65,"S4":88,"S5":95,"S6":70,"S7":82,"S8":60,"S9":91,"S10":74}
+for s, v in all_students.items():
+    if v < 75:
+        print(f"  {s}: {v}%")`} />
+### <a id="_Toc239677990"></a>Experiment 2: Detecting a Misinterpreted Column \(Numeric Code Treated as a Number\)
+
+Task: Show an example where an AI tool misinterprets data \(e\.g\., treats a numeric code as text, or vice\-versa\), and demonstrate how to verify and correct it\.
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Sample dataset \(student records\):
+
+__Student__
+
+__Roll\_No__
+
+__Marks__
+
+S1
+
+21A1001
+
+78
+
+S2
+
+21A1002
+
+85
+
+S3
+
+21A1003
+
+91
+
+S4
+
+21A1004
+
+67
+
+Suppose an instructor mistakenly asks: "What is the average Roll\_No?" A poorly guarded AI data tool might attempt to average the numeric portions and report a nonsensical figure \(e\.g\., 'average Roll\_No ≈ 21A1002\.5'\), because it is treating an identifier field as a quantity\.
+
+Verification and correction procedure:
+
+1. Inspect the column: Roll\_No values are unique per student and follow an institutional code pattern \(year \+ branch \+ serial number\) — this is an identifier/categorical field, not a measurable quantity\.
+2. Recognise that 'averaging' an identifier is mathematically meaningless — no real\-world interpretation exists for an 'average roll number'\.
+3. Re\-prompt correctly: "Roll\_No is a categorical identifier, not a quantity — do not compute statistics on it\. Instead, compute the average of the Marks column\."
+4. Confirm the corrected computation: Average Marks = \(78\+85\+91\+67\)/4 = 321/4 = 80\.25\.
+
+
+
+</details>
+
+__*Key Concepts Applied*__
+
+- This directly illustrates Section 3\.5's data\-type misinterpretation pitfall — a numeric\-looking code is not numeric data in the mathematical sense\.
+- The fix is a re\-prompt that explicitly states the correct data type/role of the column, which reliably steers the tool to the right computation\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+A brief written note flagging that Roll\_No must never be aggregated, plus the correct average of Marks \(80\.25\), demonstrating the student can catch and correct this class of AI error independently\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox initialPrompt="I have a student dataset with columns: Student, Roll_No, Marks. Roll_No values are like 21A1001, 21A1002 etc. If I ask 'what is the average Roll_No?', what would you do and why?" />
+
+<br/>
+<PyodideRunner initialCode={`# Demonstrate correct vs incorrect column handling
+students = {
+    "S1": {"Roll_No": "21A1001", "Marks": 78},
+    "S2": {"Roll_No": "21A1002", "Marks": 85},
+    "S3": {"Roll_No": "21A1003", "Marks": 91},
+    "S4": {"Roll_No": "21A1004", "Marks": 67},
+}
+
+marks = [s["Marks"] for s in students.values()]
+avg_marks = sum(marks) / len(marks)
+
+print("Roll_No is a categorical identifier — averaging it is meaningless!")
+print(f"Correct: Average Marks = {avg_marks:.2f}")`} />
+### <a id="_Toc239677991"></a>Experiment 3: Clean and Summarise a Small Sample Dataset
+
+Problem: Use an AI tool to clean and summarise a small sample dataset \(e\.g\., class attendance or marks data\)\.
+
+__*Step\-by\-Step Solution*__
+
+Sample raw \(messy\) dataset — marks out of 100, with common real\-world issues:
+
+__Student__
+
+__Marks__
+
+Anil
+
+88
+
+sunita
+
+  92
+
+RAVI
+
+N/A
+
+Divya
+
+76
+
+kiran 
+
+104
+
+Cleaning instructions to give the AI tool, and the reasoning behind each:
+
+1. Standardise name capitalisation \(e\.g\., Title Case\) — cosmetic consistency, does not change meaning\.
+2. Trim stray whitespace around values \(e\.g\., '  92' → 92, 'kiran ' → 'Kiran'\) — prevents the value being silently treated as text instead of a number\.
+3. Handle the missing value 'N/A' for Ravi — either exclude Ravi from numeric calculations or flag as missing; do NOT silently treat 'N/A' as zero, as that would wrongly deflate the average\.
+4. Flag the impossible value 104 \(out of 100\) for Kiran as a probable data\-entry error requiring human confirmation, rather than silently 'correcting' it to a guessed value\.
+
+Correct summary after cleaning \(excluding Ravi's missing value and flagging Kiran's 104 for review, rather than including it\): Average of valid entries \(Anil 88, Sunita 92, Divya 76\) = \(88\+92\+76\)/3 = 256/3 ≈ 85\.3\.
+
+__*Explanation of Approach*__
+
+The exercise operationalises Section 3\.5: an AI tool might silently 'fix' the missing or invalid values without telling the student, which would corrupt the summary\. The correct workflow always surfaces data\-quality issues for human decision rather than resolving them invisibly\.
+
+<br/>
+<PromptSandbox initialPrompt="Clean and summarise this dataset. Standardise name casing, remove extra whitespace, flag missing values (N/A) rather than replacing with zero, and flag any impossible values. Report the average marks for valid entries only.\n\nStudent | Marks\nAnil    | 88\nsunita  | 92\nRAVI    | N/A\nDivya   | 76\nkiran   | 104" />
+
+<br/>
+<PyodideRunner initialCode={`# Reproduce the data cleaning steps manually in Python
+raw = [
+    ("Anil",  88),
+    ("sunita", 92),
+    ("RAVI",   None),   # N/A
+    ("Divya",  76),
+    ("kiran ", 104),    # trailing space + impossible value
+]
+
+print("Cleaned dataset:")
+valid_marks = []
+for name, marks in raw:
+    clean_name = name.strip().title()
+    if marks is None:
+        print(f"  {clean_name}: MISSING — excluded from average")
+    elif marks > 100:
+        print(f"  {clean_name}: {marks} — FLAGGED as impossible, needs verification")
+    else:
+        print(f"  {clean_name}: {marks}")
+        valid_marks.append(marks)
+
+print(f"\nAverage (valid entries only): {sum(valid_marks)/len(valid_marks):.1f}")`} />
+### <a id="_Toc239677992"></a>Experiment 4: Three Different Chart Types from the Same Dataset
+
+Problem: Generate three different chart types from the same dataset using AI prompts and justify which is most appropriate\.
+
+__*Step\-by\-Step Solution*__
+
+Using the attendance dataset from Practical Example 1 \(10 students across Sections A and B\):
+
+__Chart Requested__
+
+__Prompt__
+
+__Appropriateness__
+
+Bar chart
+
+"Plot average attendance by section as a bar chart\."
+
+Most appropriate — compares a numeric average across 2 discrete categories clearly \(see Section 3\.3\)\.
+
+Pie chart
+
+"Plot a pie chart of how many students are above vs below 75% attendance\."
+
+Acceptable — only 2 categories \(above/below threshold\), suitable for showing proportion of the whole\.
+
+Scatter plot
+
+"Plot a scatter of each student's attendance % against their roll index number\."
+
+Least appropriate — roll index number has no meaningful continuous relationship with attendance, so a scatter plot here would show a meaningless, uninterpretable spread rather than a real trend\.
+
+__*Explanation of Approach*__
+
+The exercise deliberately includes one poorly\-suited chart \(scatter of attendance vs arbitrary roll index\) so the student practices the judgement of Section 3\.3 — being able to generate a chart is not the same as it being a meaningful one; the final justification should explicitly recommend the bar chart as best for this attendance\-by\-section comparison\.
+
+<br/>
+<PromptSandbox title="Prompt for Bar Chart" initialPrompt="Plot average attendance by section as a bar chart. Data: Section A average = 83.6%, Section B average = 75.4%" />
+<PromptSandbox title="Prompt for Pie Chart" initialPrompt="Plot a pie chart showing how many students are above vs below 75% attendance. Data: 6 students above 75%, 4 students below 75%" />
+<PromptSandbox title="Prompt for Scatter Plot" initialPrompt="Plot a scatter of each student's attendance % against their roll index number (1-10). Data: S1=92,S2=78,S3=65,S4=88,S5=95,S6=70,S7=82,S8=60,S9=91,S10=74" />
+
+<br/>
+<PyodideRunner initialCode={`import sys
+sys.stdout.write("Note: matplotlib requires a display environment. In this browser runner, we demonstrate the data and logic.\n\n")
+
+import math
+
+data = {"S1":92,"S2":78,"S3":65,"S4":88,"S5":95,"S6":70,"S7":82,"S8":60,"S9":91,"S10":74}
+sec_a = [92, 78, 65, 88, 95]
+sec_b = [70, 82, 60, 91, 74]
+
+print("=== Bar Chart Data ===")
+print(f"Section A avg: {sum(sec_a)/len(sec_a):.1f}%  (use a taller bar)")
+print(f"Section B avg: {sum(sec_b)/len(sec_b):.1f}%  (use a shorter bar)")
+
+print("\n=== Pie Chart Data ===")
+above = sum(1 for v in data.values() if v >= 75)
+below = len(data) - above
+print(f"Above 75%: {above} students ({above/len(data)*100:.0f}%)")
+print(f"Below 75%: {below} students ({below/len(data)*100:.0f}%)")
+
+print("\n=== Scatter Data ===")
+for i, (s, v) in enumerate(data.items(), 1):
+    print(f"  Roll index {i} ({s}): {v}%")
+print("\nJudgement: Bar chart is MOST appropriate — compares averages across 2 categories.")
+print("Scatter plot is LEAST appropriate — roll index has no real relationship with attendance.")`} />
+### <a id="_Toc239677993"></a>Experiment 5: Cross\-Check One AI\-Generated Statistical Claim Manually
+
+Problem: Cross\-check one AI\-generated statistical claim manually and report any discrepancy found\.
+
+__*Step\-by\-Step Solution*__
+
+Suppose an AI tool, given the Section B attendance data \(70, 82, 60, 91, 74\), reports: "The average attendance in Section B is 76\.4%\."
+
+Manual verification: Sum = 70\+82\+60\+91\+74 = 377\. Count = 5\. Mean = 377 ÷ 5 = 75\.4%\.
+
+__Discrepancy found:__
+
+The AI's claimed value \(76\.4%\) does not match the manually verified value \(75\.4%\) — a difference of exactly 1\.0 percentage point, consistent with a simple arithmetic slip \(e\.g\., mis\-summing one value\) rather than a conceptual error\.
+
+__*Explanation of Approach*__
+
+This exercise is deliberately designed to surface a discrepancy so students practice the full verification workflow: recompute independently using basic arithmetic, compare exactly, and report the size and likely cause of any mismatch, rather than assuming the AI's number is correct because it was stated confidently and formatted like a fact\.
+
+__*Alternative Method*__
+
+A student could cross\-check using a spreadsheet's built\-in AVERAGE\(\) function as a second independent tool, which would also return 75\.4%, corroborating the manual calculation and further confirming the AI's figure was in error\.
+
+<br/>
+<PromptSandbox initialPrompt="Given this dataset for Section B attendance: 70, 82, 60, 91, 74 — what is the average attendance percentage?" />
+
+<br/>
+<PyodideRunner initialCode={`# Cross-check the AI's claimed value of 76.4% against the correct calculation
+section_b = [70, 82, 60, 91, 74]
+
+correct_mean = sum(section_b) / len(section_b)
+ai_claimed = 76.4
+
+print(f"Values: {section_b}")
+print(f"Sum = {sum(section_b)}, Count = {len(section_b)}")
+print(f"Correct Mean = {correct_mean:.1f}%")
+print(f"AI Claimed   = {ai_claimed}%")
+print(f"Discrepancy  = {abs(ai_claimed - correct_mean):.1f} percentage point")
+print()
+if abs(ai_claimed - correct_mean) > 0.05:
+    print("DISCREPANCY FOUND — the AI's figure is incorrect!")
+else:
+    print("Values match — AI result verified.")`} />

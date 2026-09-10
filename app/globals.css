@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #6A1B9A; /* Deep Purple / Violet */
+  --accent: #D32F2F; /* Crimson */
+  --bg: #ffffff;
+  --text: #333333;
+  --sidebar-bg: #f8f9fa;
+  --sidebar-text: #444;
+  --border: #e0e0e0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.layout-container {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 2rem;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 1rem;
+}
+
+.sidebar a {
+  font-weight: 500;
+  color: var(--sidebar-text);
+}
+
+.sidebar a:hover, .sidebar a.active {
+  color: var(--primary);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 4rem;
+  max-width: 900px;
+  box-sizing: border-box;
+}
+
+.main-content p, 
+.main-content li {
+  text-align: justify;
+}
+
+/* Markdown specific styles */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--primary);
+  color: white;
+}
+
+details {
+  background-color: #f1f3f5;
+  border-left: 4px solid var(--accent);
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--primary);
+  outline: none;
+}
+
+summary:hover {
+  color: var(--accent);
+}
+
+code {
+  background-color: #f1f3f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.sandbox-response h1,
+.sandbox-response h2,
+.sandbox-response h3,
+.sandbox-response h4,
+.sandbox-response h5,
+.sandbox-response h6 {
+  color: var(--text);
+}

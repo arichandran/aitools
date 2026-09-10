@@ -1,0 +1,329 @@
+import PyodideRunner from "@/components/PyodideRunner";
+import PromptSandbox from "@/components/PromptSandbox";
+
+# <a id="_Toc239677994"></a>UNIT 4: AI Tools for Coding, Writing, and Productivity
+
+## <a id="_Toc239677995"></a>1\. Detailed Unit Content
+
+### <a id="_Toc239677996"></a>4\.1 AI Coding Assistants: Generation, Explanation, and Debugging
+
+AI coding assistants operate at three levels of support: \(a\) code generation — writing new code from a natural\-language description; \(b\) code explanation — describing what an existing, possibly unfamiliar, piece of code does line by line or as a whole; and \(c\) debugging — identifying why a program produces incorrect output or crashes, and proposing a fix\. Tools like GitHub Copilot and Cursor work inline inside an editor, suggesting completions as the student types, while conversational tools \(ChatGPT, Claude\) work through a chat interface where the student pastes code and describes the problem\. Claude Code and similar agentic tools go further, autonomously reading multiple files in a project, running the code, and iterating on fixes with minimal step\-by\-step guidance\.
+
+### <a id="_Toc239677997"></a>4\.2 AI Writing Assistants for Reports, Emails, and Documentation
+
+Writing assistants help at every stage of producing a document: drafting an initial structure, expanding bullet points into full prose, checking grammar and tone, and adapting formality for the audience \(a professor vs a company recruiter vs a teammate\)\. The key skill is prompt specificity about audience and purpose — 'write a formal report' produces a different document from 'write a two\-paragraph informal update for my project teammates'\.
+
+### <a id="_Toc239677998"></a>4\.3 AI Tools for Scheduling, Note\-Taking, and Meeting Summarisation
+
+Tools such as Notion AI and Fathom can transcribe a lecture or meeting recording, extract action items, and generate a concise summary automatically\. This reduces the manual burden of note\-taking, but the source recording \(or the student's own notes\) should be retained so any AI summarisation error can be traced back and corrected\.
+
+### <a id="_Toc239677999"></a>4\.4 AI\-Assisted Presentation and Slide\-Outline Generation
+
+Given a topic and target duration, tools such as Gamma or a conversational AI can propose a slide\-by\-slide outline \(title, 3\-5 bullet points per slide, suggested visual\) along with speaker notes\. This accelerates the earliest, often most time\-consuming part of preparing a presentation — organising content into a logical sequence — leaving the student to focus on refining content accuracy, visuals, and delivery\.
+
+### <a id="_Toc239678000"></a>4\.5 Integrating AI Tools into a Day\-to\-Day Academic and Engineering Workflow
+
+A mature AI\-augmented workflow assigns each stage of a task to the tool best suited for it \(see Unit 1, Section 1\.4 selection criteria\), while keeping a human decision point at the end of every stage\. A typical weekly student workflow might look like:
+
+__Stage__
+
+__Tool Type__
+
+__Human Checkpoint__
+
+Capture lecture notes
+
+Note\-taking / transcription AI
+
+Confirm no key formula or step was dropped
+
+Draft lab report
+
+Writing assistant
+
+Verify data, calculations, and conclusions are accurate
+
+Debug lab code
+
+Coding assistant
+
+Understand and test the proposed fix before submitting
+
+Prepare seminar slides
+
+Slide\-outline generator
+
+Check technical accuracy and remove any unverified claim
+
+### <a id="_Toc239678001"></a>2\. List of Experiments
+
+### <a id="_Toc239678002"></a>Experiment 1: Generate a Program, Introduce a Bug, and Have the AI Debug It
+
+Task: Use an AI coding assistant to generate a simple program \(e\.g\., a temperature converter\), then intentionally introduce a bug and have the AI debug it\.
+
+<details>
+
+<summary><b>Worked Solution — Step 1: Generate the correct program</b></summary>
+
+
+Prompt: "Write a Python program that converts a temperature from Celsius to Fahrenheit, taking user input\."
+
+\# Correct version
+
+celsius = float\(input\("Enter temperature in Celsius: "\)\)
+
+fahrenheit = \(celsius \* 9/5\) \+ 32
+
+print\(f"\{celsius\} Celsius is equal to \{fahrenheit\} Fahrenheit"\)
+
+
+
+</details>
+
+<br/>
+<PyodideRunner initialCode={`# Step 1: Correct Celsius to Fahrenheit converter
+celsius = 100  # test value (avoid input() in browser)
+fahrenheit = (celsius * 9/5) + 32
+print(f"{celsius} Celsius is equal to {fahrenheit} Fahrenheit")
+print("Expected: 212.0 —", "CORRECT" if fahrenheit == 212.0 else "WRONG")`} />
+
+__*Step 2: Intentionally introduce a bug*__
+
+\# Buggy version \(operator precedence error\)
+
+celsius = float\(input\("Enter temperature in Celsius: "\)\)
+
+fahrenheit = celsius \* 9/5 \+ 32 / 9   \# bug: 32 wrongly divided by 9
+
+print\(f"\{celsius\} Celsius is equal to \{fahrenheit\} Fahrenheit"\)
+
+Test case: for celsius = 100, the buggy code computes 100\*9/5 \+ 32/9 = 180 \+ 3\.56 = 183\.56°F, whereas the correct answer is 212°F\.
+
+__*Step 3: Ask the AI to debug*__
+
+"This Celsius\-to\-Fahrenheit converter gives 183\.56 for an input of 100, but the correct answer is 212\. Find and fix the bug\."
+
+Expected AI diagnosis: the formula should be \(celsius \* 9/5\) \+ 32, but the code instead adds '32/9' instead of a standalone '32' — due to missing parentheses / misplaced division, 32 is being divided by 9 rather than added as a whole constant\. Corrected line: fahrenheit = \(celsius \* 9/5\) \+ 32\.
+
+__*Key Concepts Applied*__
+
+- Debugging requires giving the AI both the code and the observed\-vs\-expected behaviour \(a failing test case\), not just the code alone — this mirrors real\-world bug reports\.
+- The root cause here is an operator\-precedence / grouping mistake, one of the most common categories of beginner programming bugs\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+Corrected program that, for celsius = 100, prints "100\.0 Celsius is equal to 212\.0 Fahrenheit", matching the expected value\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox initialPrompt="This Celsius-to-Fahrenheit converter gives 183.56 for an input of 100, but the correct answer is 212. Find and fix the bug.\n\nBuggy code:\ncelsius = float(input('Enter temperature in Celsius: '))\nfahrenheit = celsius * 9/5 + 32 / 9\nprint(f'{celsius} Celsius is equal to {fahrenheit} Fahrenheit')" />
+
+<br/>
+<PyodideRunner initialCode={`# Step 2: Run the BUGGY version to observe the wrong output
+celsius = 100
+fahrenheit_buggy = celsius * 9/5 + 32 / 9  # bug: 32/9 instead of 32
+print(f"Buggy result: {celsius}C = {fahrenheit_buggy:.2f}F  (WRONG — expected 212.0)")
+
+# Step 3: Run the FIXED version
+fahrenheit_fixed = (celsius * 9/5) + 32
+print(f"Fixed result: {celsius}C = {fahrenheit_fixed:.1f}F  (CORRECT)")
+print("Bug was: '32 / 9' instead of standalone '32' (operator precedence error)")`} />
+
+### <a id="_Toc239678003"></a>Experiment 2: Generate a Presentation Outline and Speaker Notes
+
+Task: Generate a presentation outline and speaker notes from a topic prompt using an AI writing/productivity tool\.
+
+<details>
+
+<summary><b>Worked Solution</b></summary>
+
+
+Prompt: "Create a 5\-slide outline with speaker notes for a 5\-minute seminar on 'Introduction to Generative AI', aimed at first\-year engineering students\."
+
+__Slide__
+
+__Title & Bullet Points__
+
+__Speaker Notes \(summary\)__
+
+1
+
+Title: What is Generative AI? — Definition; contrast with traditional AI/ML
+
+Open with a relatable example \(e\.g\., ChatGPT\) before defining the term formally\.
+
+2
+
+How It Works — Trained on large text data; predicts next word; Transformer architecture \(conceptual\)
+
+Keep this non\-mathematical; use the 'autocomplete on steroids' analogy\.
+
+3
+
+Popular Tools & Categories — Text, image, code, data tools \(recap Unit 1 table\)
+
+Briefly name 1\-2 tools per category so the audience recognises real products\.
+
+4
+
+Real\-World Applications — Writing help, coding assistance, data analysis, design
+
+Give one concrete campus\-relevant example per application\.
+
+5
+
+Risks & Responsible Use — Hallucination, bias, academic integrity, data privacy
+
+End on a balanced note: powerful but requires verification and ethical use\.
+
+
+
+</details>
+
+<br/>
+<PromptSandbox initialPrompt="Create a 5-slide outline with speaker notes for a 5-minute seminar on 'Introduction to Generative AI', aimed at first-year engineering students." />
+
+__*Key Concepts Applied*__
+
+- The outline respects the '5 minutes → 5 slides' pacing constraint \(roughly one minute per slide\), which the student should always specify explicitly in the prompt\.
+- Ending on Slide 5 with risks and responsible use previews Unit 5 and reflects good academic practice for any AI\-related presentation\.
+
+<details>
+
+<summary><b>Expected Output</b></summary>
+
+
+A 5\-row outline \(as above\) that a student can directly paste into presentation software, with each speaker\-note summary expandable into full spoken sentences during rehearsal\.
+
+
+
+</details>
+
+### <a id="_Toc239678004"></a>Experiment 3: Write and Debug a Simple Program Using an AI Coding Tool
+
+Problem: Use an AI coding tool to write and debug a simple program for a given problem statement\.
+
+__*Step\-by\-Step Solution*__
+
+Problem statement: Write a program that checks whether a given number is prime\.
+
+\# Initial AI\-generated version \(contains an off\-by\-one bug\)
+
+def is\_prime\(n\):
+
+    if n < 2:
+
+        return False
+
+    for i in range\(2, n\):        \# bug: should stop at sqrt\(n\), and range\(2, n\) misses n\-1 as a valid non\-factor check is fine, but inefficient AND fails for n where n itself equals a boundary — real bug demo below
+
+        if n % i == 0:
+
+            return False
+
+    return True
+
+ 
+
+print\(is\_prime\(1\)\)   \# should be False \-> check
+
+print\(is\_prime\(2\)\)   \# should be True
+
+Testing reveals is\_prime\(1\) correctly returns False and is\_prime\(2\) correctly returns True, but the loop range\(2, n\) is inefficient for large n \(checks up to n\-1 unnecessarily\)\. Debugging prompt: "This prime\-checking function works correctly but is slow for large numbers\. Optimise it\."
+
+\# Optimised version
+
+def is\_prime\(n\):
+
+    if n < 2:
+
+        return False
+
+    for i in range\(2, int\(n \*\* 0\.5\) \+ 1\):   \# only check up to sqrt\(n\)
+
+        if n % i == 0:
+
+            return False
+
+    return True
+
+__*Explanation of Approach*__
+
+Correctness and efficiency are two separate concerns: the original code was not factually wrong, but was needlessly slow, since any factor larger than the square root of n must pair with a factor smaller than the square root — checking beyond √n is redundant\. This distinction \(bug vs inefficiency\) is an important lesson for beginner programmers\.
+
+<br/>
+<PromptSandbox />
+<PyodideRunner />
+
+### <a id="_Toc239678005"></a>Experiment 4: Draft a Formal Email or Report and Manually Edit It
+
+Problem: Draft a formal email or short report using an AI writing assistant, then manually edit it for accuracy and tone\.
+
+__*Step\-by\-Step Solution*__
+
+Scenario: requesting a one\-day extension for a lab report submission\.
+
+AI\-drafted version \(typical first pass\):
+
+__AI Draft:__
+
+"Dear Sir/Madam, I am writing to request an extension for my lab report submission due to unforeseen circumstances\. I would be grateful if you could grant me one additional day\. Thank you for your understanding\. Sincerely, \[Name\]"
+
+Manual edit for accuracy and tone \(student adds specific, truthful detail and addresses the actual professor by name/designation, since a vague 'unforeseen circumstances' reads as evasive and unverifiable\):
+
+__Edited Final Version:__
+
+"Dear Dr\. \[Surname\], I am writing to request a one\-day extension on the Data Structures lab report \(due Friday\), as our lab system was down for maintenance on Wednesday afternoon, delaying my final test runs\. I would be grateful for submission until Saturday evening\. Thank you for considering this request\. Regards, \[Full Name\], Roll No\. \[XXXX\]"
+
+__*Explanation of Approach*__
+
+The AI draft provides correct structure and formal tone instantly, but the student must replace generic, unverifiable phrases \('unforeseen circumstances'\) with specific, true, checkable details, and add identifying information \(name, roll number\) the AI could not have known — this is the core of the 'draft, then verify and personalise' workflow from Section 4\.2\.
+
+<br/>
+<PromptSandbox />
+
+### <a id="_Toc239678006"></a>Experiment 5: Generate a Slide Outline for a 5\-Minute Seminar and Refine It
+
+Problem: Generate a slide outline for a 5\-minute seminar topic using an AI tool and refine it\.
+
+__*Step\-by\-Step Solution*__
+
+Chosen topic: 'Basics of Cloud Computing'\.
+
+Initial AI\-generated outline \(first pass, before refinement\) — typically 8\-10 dense slides covering history, deployment models, service models, providers, and future trends all at once, too much for 5 minutes\.
+
+Refinement prompt: "This outline has too much content for a 5\-minute talk\. Condense it to exactly 4 slides, keeping only the most essential points a first\-year student needs\."
+
+__Slide__
+
+__Content__
+
+1
+
+What is Cloud Computing? — On\-demand computing resources over the internet, pay\-as\-you\-go
+
+2
+
+Service Models — IaaS, PaaS, SaaS with one everyday example each \(e\.g\., SaaS = Gmail\)
+
+3
+
+Why It Matters — Cost savings, scalability, no need to own physical hardware
+
+4
+
+Real Providers — AWS, Microsoft Azure, Google Cloud \(one line each\)
+
+__*Explanation of Approach*__
+
+The exercise demonstrates the same iterative\-refinement principle taught in Unit 2 \(Section 2\.4\) applied specifically to slide generation: the first AI pass over\-includes content, and a targeted refinement instruction \('condense to exactly 4 slides, keep only essentials'\) produces a presentation that actually fits the stated time constraint\.
+
+<br/>
+<PromptSandbox />
+
