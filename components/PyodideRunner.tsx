@@ -4,7 +4,11 @@ import { useState, useRef, useEffect } from "react";
 
 declare global {
   interface Window {
-    loadPyodide: (config: { indexURL: string }) => Promise<any>;
+    loadPyodide: (config: {
+      indexURL: string;
+      stdout?: (msg: string) => void;
+      stderr?: (msg: string) => void;
+    }) => Promise<any>;
   }
 }
 
