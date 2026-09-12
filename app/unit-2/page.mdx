@@ -1,4 +1,5 @@
 import PyodideRunner from "@/components/PyodideRunner";
+import CodeReference from "@/components/CodeReference";
 import PromptSandbox from "@/components/PromptSandbox";
 
 # <a id="_Toc239677968"></a>UNIT 2: Prompt Engineering and Generative AI Tools
@@ -153,9 +154,9 @@ A short table or sequence \(as shown above\) with the prompt at each stage and a
 
 <br/>
 <PromptSandbox title="Stage 0: Vague Prompt" initialPrompt="Explain project scheduling." />
-<PromptSandbox title="Stage 1: Add Context" initialPrompt="Explain project scheduling to a first-year B.Tech student who has never managed a project before." />
-<PromptSandbox title="Stage 2: Add Format" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points, each 1-2 sentences long." />
-<PromptSandbox title="Stage 3: Add Example (Final)" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points (1-2 sentences each), using the example of organising a college technical fest." />
+<PromptSandbox title="Stage 1: Add Context" showTools="none" initialPrompt="Explain project scheduling to a first-year B.Tech student who has never managed a project before." />
+<PromptSandbox title="Stage 2: Add Format" showTools="none" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points, each 1-2 sentences long." />
+<PromptSandbox title="Stage 3: Add Example (Final)" showTools="none" initialPrompt="Explain project scheduling to a first-year B.Tech student, in 5 bullet points (1-2 sentences each), using the example of organising a college technical fest." />
 
 ### <a id="_Toc239677977"></a>Experiment 2: Few\-Shot Prompting for a Specific Output Format
 
@@ -282,8 +283,8 @@ Warmer tone, likely uses an analogy \(e\.g\., nested dolls, mirrors facing each 
 
 <br/>
 <PromptSandbox initialPrompt="What is recursion?" />
-<PromptSandbox initialPrompt="Explain recursion in programming to a first-year student, in under 100 words, using the factorial function as the example, and explicitly state the base case and recursive case." />
-<PromptSandbox initialPrompt="You are a friendly senior student mentoring a junior before their first programming exam. Explain recursion using an analogy from daily life, avoiding code entirely." />
+<PromptSandbox showTools="none" initialPrompt="Explain recursion in programming to a first-year student, in under 100 words, using the factorial function as the example, and explicitly state the base case and recursive case." />
+<PromptSandbox showTools="none" initialPrompt="You are a friendly senior student mentoring a junior before their first programming exam. Explain recursion using an analogy from daily life, avoiding code entirely." />
 
 __*Explanation of Approach*__
 
@@ -350,7 +351,7 @@ A student can cross\-verify by computing average speed using the harmonic\-mean\
 <PromptSandbox initialPrompt="Solve this step by step, showing each calculation before giving the final answer:\n\nA car travels 180 km in 2 hours 30 minutes, then a further 96 km in 1 hour 20 minutes. What is its average speed for the entire journey, in km/h?" />
 
 <br/>
-<PyodideRunner initialCode={`# Verify the chain-of-thought arithmetic from Experiment 5
+<CodeReference code={`# Verify the chain-of-thought arithmetic from Experiment 5
 leg1_dist = 180  # km
 leg1_time = 2 + 30/60  # hours
 
@@ -366,4 +367,5 @@ print(f"Leg 2: {leg2_dist} km in {leg2_time:.3f} h → {leg2_dist/leg2_time:.1f}
 print(f"Total distance: {total_dist} km")
 print(f"Total time: {total_time:.3f} h")
 print(f"Average speed: {avg_speed:.1f} km/h")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 

@@ -15,7 +15,11 @@ declare global {
 import Script from "next/script";
 
 export default function PyodideRunner({ initialCode = "" }: { initialCode?: string }) {
-  const [code, setCode] = useState(initialCode || `print("Welcome to Vignan's Lara Institute of Technology and Science!!")`);
+  const isPlaceholderOrEmpty = initialCode.trim() === "" || initialCode.trim().startsWith("# Type the code below");
+  const defaultCode = isPlaceholderOrEmpty ? "" : initialCode;
+  const [code, setCode] = useState(defaultCode);
+  const placeholderText = "Type the code here";
+  
   const [output, setOutput] = useState("");
   const [isReady, setIsReady] = useState(false);
   const pyodideRef = useRef<any>(null);
@@ -58,6 +62,7 @@ export default function PyodideRunner({ initialCode = "" }: { initialCode?: stri
       <textarea
         value={code}
         onChange={(e) => setCode(e.target.value)}
+        placeholder={placeholderText}
         style={{ width: "100%", minHeight: "150px", fontFamily: "monospace", padding: "8px", border: "1px solid #ddd", borderRadius: "4px" }}
       />
       <button 

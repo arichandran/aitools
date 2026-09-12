@@ -1,4 +1,5 @@
 import PyodideRunner from "@/components/PyodideRunner";
+import CodeReference from "@/components/CodeReference";
 import PromptSandbox from "@/components/PromptSandbox";
 
 # <a id="_Toc239677994"></a>UNIT 4: AI Tools for Coding, Writing, and Productivity
@@ -81,11 +82,12 @@ print\(f"\{celsius\} Celsius is equal to \{fahrenheit\} Fahrenheit"\)
 </details>
 
 <br/>
-<PyodideRunner initialCode={`# Step 1: Correct Celsius to Fahrenheit converter
+<CodeReference code={`# Step 1: Correct Celsius to Fahrenheit converter
 celsius = 100  # test value (avoid input() in browser)
 fahrenheit = (celsius * 9/5) + 32
 print(f"{celsius} Celsius is equal to {fahrenheit} Fahrenheit")
 print("Expected: 212.0 —", "CORRECT" if fahrenheit == 212.0 else "WRONG")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 
 __*Step 2: Intentionally introduce a bug*__
 
@@ -125,7 +127,7 @@ Corrected program that, for celsius = 100, prints "100\.0 Celsius is equal to 21
 <PromptSandbox initialPrompt="This Celsius-to-Fahrenheit converter gives 183.56 for an input of 100, but the correct answer is 212. Find and fix the bug.\n\nBuggy code:\ncelsius = float(input('Enter temperature in Celsius: '))\nfahrenheit = celsius * 9/5 + 32 / 9\nprint(f'{celsius} Celsius is equal to {fahrenheit} Fahrenheit')" />
 
 <br/>
-<PyodideRunner initialCode={`# Step 2: Run the BUGGY version to observe the wrong output
+<CodeReference code={`# Step 2: Run the BUGGY version to observe the wrong output
 celsius = 100
 fahrenheit_buggy = celsius * 9/5 + 32 / 9  # bug: 32/9 instead of 32
 print(f"Buggy result: {celsius}C = {fahrenheit_buggy:.2f}F  (WRONG — expected 212.0)")
@@ -134,6 +136,7 @@ print(f"Buggy result: {celsius}C = {fahrenheit_buggy:.2f}F  (WRONG — expected 
 fahrenheit_fixed = (celsius * 9/5) + 32
 print(f"Fixed result: {celsius}C = {fahrenheit_fixed:.1f}F  (CORRECT)")
 print("Bug was: '32 / 9' instead of standalone '32' (operator precedence error)")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 
 ### <a id="_Toc239678003"></a>Experiment 2: Generate a Presentation Outline and Speaker Notes
 
@@ -258,7 +261,7 @@ __*Explanation of Approach*__
 Correctness and efficiency are two separate concerns: the original code was not factually wrong, but was needlessly slow, since any factor larger than the square root of n must pair with a factor smaller than the square root — checking beyond √n is redundant\. This distinction \(bug vs inefficiency\) is an important lesson for beginner programmers\.
 
 <br/>
-<PromptSandbox />
+<PromptSandbox initialPrompt="This Python function checks for prime numbers but is very slow for large numbers. Can you optimize it to run faster?\n\ndef is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True" />
 <PyodideRunner />
 
 ### <a id="_Toc239678005"></a>Experiment 4: Draft a Formal Email or Report and Manually Edit It
@@ -286,7 +289,7 @@ __*Explanation of Approach*__
 The AI draft provides correct structure and formal tone instantly, but the student must replace generic, unverifiable phrases \('unforeseen circumstances'\) with specific, true, checkable details, and add identifying information \(name, roll number\) the AI could not have known — this is the core of the 'draft, then verify and personalise' workflow from Section 4\.2\.
 
 <br/>
-<PromptSandbox />
+<PromptSandbox initialPrompt="Draft a formal, polite email to my professor requesting a one-day extension for my Data Structures lab report. Explain that I need the extension due to unforeseen circumstances." />
 
 ### <a id="_Toc239678006"></a>Experiment 5: Generate a Slide Outline for a 5\-Minute Seminar and Refine It
 
@@ -325,5 +328,5 @@ __*Explanation of Approach*__
 The exercise demonstrates the same iterative\-refinement principle taught in Unit 2 \(Section 2\.4\) applied specifically to slide generation: the first AI pass over\-includes content, and a targeted refinement instruction \('condense to exactly 4 slides, keep only essentials'\) produces a presentation that actually fits the stated time constraint\.
 
 <br/>
-<PromptSandbox />
+<PromptSandbox initialPrompt="This outline has too much content for a 5-minute talk. Condense it to exactly 4 slides, keeping only the most essential points a first-year student needs." />
 

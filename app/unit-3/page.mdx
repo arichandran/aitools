@@ -1,4 +1,5 @@
 import PyodideRunner from "@/components/PyodideRunner";
+import CodeReference from "@/components/CodeReference";
 import PromptSandbox from "@/components/PromptSandbox";
 
 # <a id="_Toc239677981"></a>UNIT 3: AI Tools for Data Analysis and Visualization
@@ -178,7 +179,7 @@ A short table \(Mean, Median, Minimum per section, matching the manual calculati
 <PromptSandbox initialPrompt="Using this attendance dataset, report the mean, median, and minimum attendance for each section, and identify any student below 75% attendance:\n\nSection A: S1=92%, S2=78%, S3=65%, S4=88%, S5=95%\nSection B: S6=70%, S7=82%, S8=60%, S9=91%, S10=74%" />
 
 <br/>
-<PyodideRunner initialCode={`import statistics
+<CodeReference code={`import statistics
 
 section_a = [92, 78, 65, 88, 95]
 section_b = [70, 82, 60, 91, 74]
@@ -194,6 +195,7 @@ all_students = {"S1":92,"S2":78,"S3":65,"S4":88,"S5":95,"S6":70,"S7":82,"S8":60,
 for s, v in all_students.items():
     if v < 75:
         print(f"  {s}: {v}%")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 ### <a id="_Toc239677990"></a>Experiment 2: Detecting a Misinterpreted Column \(Numeric Code Treated as a Number\)
 
 Task: Show an example where an AI tool misinterprets data \(e\.g\., treats a numeric code as text, or vice\-versa\), and demonstrate how to verify and correct it\.
@@ -268,7 +270,7 @@ A brief written note flagging that Roll\_No must never be aggregated, plus the c
 <PromptSandbox initialPrompt="I have a student dataset with columns: Student, Roll_No, Marks. Roll_No values are like 21A1001, 21A1002 etc. If I ask 'what is the average Roll_No?', what would you do and why?" />
 
 <br/>
-<PyodideRunner initialCode={`# Demonstrate correct vs incorrect column handling
+<CodeReference code={`# Demonstrate correct vs incorrect column handling
 students = {
     "S1": {"Roll_No": "21A1001", "Marks": 78},
     "S2": {"Roll_No": "21A1002", "Marks": 85},
@@ -281,6 +283,7 @@ avg_marks = sum(marks) / len(marks)
 
 print("Roll_No is a categorical identifier — averaging it is meaningless!")
 print(f"Correct: Average Marks = {avg_marks:.2f}")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 ### <a id="_Toc239677991"></a>Experiment 3: Clean and Summarise a Small Sample Dataset
 
 Problem: Use an AI tool to clean and summarise a small sample dataset \(e\.g\., class attendance or marks data\)\.
@@ -330,7 +333,7 @@ The exercise operationalises Section 3\.5: an AI tool might silently 'fix' the m
 <PromptSandbox initialPrompt="Clean and summarise this dataset. Standardise name casing, remove extra whitespace, flag missing values (N/A) rather than replacing with zero, and flag any impossible values. Report the average marks for valid entries only.\n\nStudent | Marks\nAnil    | 88\nsunita  | 92\nRAVI    | N/A\nDivya   | 76\nkiran   | 104" />
 
 <br/>
-<PyodideRunner initialCode={`# Reproduce the data cleaning steps manually in Python
+<CodeReference code={`# Reproduce the data cleaning steps manually in Python
 raw = [
     ("Anil",  88),
     ("sunita", 92),
@@ -352,6 +355,7 @@ for name, marks in raw:
         valid_marks.append(marks)
 
 print(f"\nAverage (valid entries only): {sum(valid_marks)/len(valid_marks):.1f}")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 ### <a id="_Toc239677992"></a>Experiment 4: Three Different Chart Types from the Same Dataset
 
 Problem: Generate three different chart types from the same dataset using AI prompts and justify which is most appropriate\.
@@ -394,7 +398,7 @@ The exercise deliberately includes one poorly\-suited chart \(scatter of attenda
 <PromptSandbox title="Prompt for Scatter Plot" initialPrompt="Plot a scatter of each student's attendance % against their roll index number (1-10). Data: S1=92,S2=78,S3=65,S4=88,S5=95,S6=70,S7=82,S8=60,S9=91,S10=74" />
 
 <br/>
-<PyodideRunner initialCode={`import sys
+<CodeReference code={`import sys
 sys.stdout.write("Note: matplotlib requires a display environment. In this browser runner, we demonstrate the data and logic.\n\n")
 
 import math
@@ -418,6 +422,7 @@ for i, (s, v) in enumerate(data.items(), 1):
     print(f"  Roll index {i} ({s}): {v}%")
 print("\nJudgement: Bar chart is MOST appropriate — compares averages across 2 categories.")
 print("Scatter plot is LEAST appropriate — roll index has no real relationship with attendance.")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />
 ### <a id="_Toc239677993"></a>Experiment 5: Cross\-Check One AI\-Generated Statistical Claim Manually
 
 Problem: Cross\-check one AI\-generated statistical claim manually and report any discrepancy found\.
@@ -444,7 +449,7 @@ A student could cross\-check using a spreadsheet's built\-in AVERAGE\(\) functio
 <PromptSandbox initialPrompt="Given this dataset for Section B attendance: 70, 82, 60, 91, 74 — what is the average attendance percentage?" />
 
 <br/>
-<PyodideRunner initialCode={`# Cross-check the AI's claimed value of 76.4% against the correct calculation
+<CodeReference code={`# Cross-check the AI's claimed value of 76.4% against the correct calculation
 section_b = [70, 82, 60, 91, 74]
 
 correct_mean = sum(section_b) / len(section_b)
@@ -460,3 +465,4 @@ if abs(ai_claimed - correct_mean) > 0.05:
     print("DISCREPANCY FOUND — the AI's figure is incorrect!")
 else:
     print("Values match — AI result verified.")`} />
+<PyodideRunner initialCode={`# Type the code below this line to practice\n`} />

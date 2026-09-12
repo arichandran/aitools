@@ -1,68 +1,77 @@
 "use client";
 
-import { useState } from "react";
-
-import ReactMarkdown from 'react-markdown';
-
-export default function PromptSandbox({ initialPrompt = "", title = "Prompt Sandbox", apiEndpoint = "/api/gemini" }: { initialPrompt?: string, title?: string, apiEndpoint?: string }) {
-  const [prompt, setPrompt] = useState(initialPrompt);
-  const [response, setResponse] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async () => {
-    if (!prompt.trim()) return;
-    setIsLoading(true);
-    setResponse("");
-    
-    try {
-      const res = await fetch(apiEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
-      
-      if (!res.body) throw new Error("No response body");
-      
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let done = false;
-      
-      while (!done) {
-        const { value, done: readerDone } = await reader.read();
-        done = readerDone;
-        if (value) {
-          setResponse((prev) => prev + decoder.decode(value, { stream: true }));
-        }
-      }
-    } catch (err: any) {
-      setResponse(`Error: ${err.message}`);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+export default function PromptSandbox({ 
+  initialPrompt = "", 
+  title = "Sample Prompt", 
+  apiEndpoint = "",
+  showTools = "all"
+}: { 
+  initialPrompt?: string, 
+  title?: string, 
+  apiEndpoint?: string,
+  showTools?: "all" | "gemini" | "claude" | "none"
+}) {
   return (
     <div className="prompt-sandbox" style={{ border: "1px solid #ccc", padding: "16px", borderRadius: "8px", margin: "16px 0", backgroundColor: "#fafafa" }}>
-      <h4 style={{ margin: "0 0 8px 0" }}>{title}</h4>
-      <textarea
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Enter your prompt here..."
-        style={{ width: "100%", minHeight: "80px", fontFamily: "inherit", padding: "8px", border: "1px solid #ddd", borderRadius: "4px" }}
-      />
-      <button 
-        onClick={handleSubmit} 
-        disabled={isLoading}
-        style={{ marginTop: "8px", padding: "8px 16px", backgroundColor: "#D32F2F", color: "#fff", border: "none", borderRadius: "4px", cursor: isLoading ? "not-allowed" : "pointer" }}
+      <h4 style={{ margin: "0 0 8px 0", display: "flex", alignItems: "baseline", flexWrap: "wrap" }}>
+        {title}
+        {showTools === "none" && (
+          <span style={{ fontSize: "0.85rem", fontWeight: "normal", color: "#666", marginLeft: "8px", fontStyle: "italic" }}>
+            (use the prompt below in the tool selected above)
+          </span>
+        )}
+      </h4>
+      <div
+        style={{
+          width: "100%",
+          boxSizing: "border-box",
+          fontFamily: "'Consolas', 'Courier New', monospace",
+          fontSize: "0.95rem",
+          padding: "16px",
+          border: "1px solid #e2e8f0",
+          borderRadius: "6px",
+          backgroundColor: "#f8fafc",
+          whiteSpace: "pre-wrap",
+          wordWrap: "break-word",
+          color: "#334155",
+          lineHeight: "1.6",
+          overflowX: "auto"
+        }}
       >
-        {isLoading ? "Generating..." : "Submit Prompt"}
-      </button>
-      {response && (
-        <div style={{ marginTop: "16px", padding: "16px", backgroundColor: "#fff", border: "1px solid #eee", borderRadius: "4px" }}>
-          <strong>Response:</strong>
-          <div className="sandbox-response" style={{ marginTop: "8px" }}>
-            <ReactMarkdown>{response}</ReactMarkdown>
-          </div>
+        {initialPrompt ? initialPrompt.replace(/\\n/g, '\n') : "Enter your prompt here..."}
+      </div>
+      
+      {showTools !== "none" && (
+        <div style={{ marginTop: "16px", display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "center" }}>
+          <span style={{ fontSize: "0.95rem", color: "#333", marginRight: "4px", fontWeight: "bold" }}>Execute on:</span>
+          
+          {(showTools === "all" || showTools === "gemini") && (
+            <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" 
+               style={{ padding: "6px 12px", border: "1px solid #1a73e8", borderRadius: "4px", textDecoration: "none", color: "#1a73e8", backgroundColor: "#e8f0fe", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
+              Gemini <span style={{ fontSize: "0.8em" }}>↗</span>
+            </a>
+          )}
+          
+          {(showTools === "all" || showTools === "claude") && (
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer" 
+               style={{ padding: "6px 12px", border: "1px solid #d97757", borderRadius: "4px", textDecoration: "none", color: "#d97757", backgroundColor: "#fdf3f0", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
+              Claude <span style={{ fontSize: "0.8em" }}>↗</span>
+            </a>
+          )}
+          
+          {showTools === "all" && (
+            <>
+              <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" 
+                 style={{ padding: "6px 12px", border: "1px solid #10a37f", borderRadius: "4px", textDecoration: "none", color: "#10a37f", backgroundColor: "#e6f6f2", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
+                ChatGPT <span style={{ fontSize: "0.8em" }}>↗</span>
+              </a>
+              
+              <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" 
+                 style={{ padding: "6px 12px", border: "1px solid #0f172a", borderRadius: "4px", textDecoration: "none", color: "#0f172a", backgroundColor: "#f1f5f9", fontWeight: 500, display: "flex", alignItems: "center", gap: "4px" }}>
+                Perplexity <span style={{ fontSize: "0.8em" }}>↗</span>
+              </a>
+            </>
+          )}
         </div>
       )}
     </div>

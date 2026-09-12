@@ -41,7 +41,7 @@ a:hover {
 }
 
 .sidebar {
-  width: 250px;
+  width: 320px;
   background-color: var(--sidebar-bg);
   border-right: 1px solid var(--border);
   padding: 2rem;
@@ -79,7 +79,7 @@ a:hover {
 .main-content {
   flex: 1;
   padding: 2rem 4rem;
-  max-width: 900px;
+  max-width: 1000px;
   box-sizing: border-box;
 }
 

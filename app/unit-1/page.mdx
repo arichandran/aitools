@@ -135,10 +135,10 @@ Task \(as given in syllabus\): Ask two different AI chatbots the same general en
 
 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
   <div style={{ flex: '1 1 300px' }}>
-    <PromptSandbox title="Prompt Sandbox (Chatbot A)" initialPrompt="Explain the engineering design process." />
+    <PromptSandbox title="Prompt Sandbox (Chatbot A)" showTools="gemini" initialPrompt="Explain the engineering design process." />
   </div>
   <div style={{ flex: '1 1 300px' }}>
-    <PromptSandbox title="Prompt Sandbox (Chatbot B)" apiEndpoint="/api/chatbot-b" initialPrompt="Explain the engineering design process." />
+    <PromptSandbox title="Prompt Sandbox (Chatbot B)" showTools="claude" initialPrompt="Explain the engineering design process." />
   </div>
 </div>
 
@@ -266,10 +266,10 @@ Both quality responses should converge on: Analysis = studying/evaluating someth
 <br/>
 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
   <div style={{ flex: '1 1 300px' }}>
-    <PromptSandbox title="Platform A Response" initialPrompt="Explain the difference between analysis and design in engineering." />
+    <PromptSandbox title="Platform A Response" showTools="gemini" initialPrompt="Explain the difference between analysis and design in engineering." />
   </div>
   <div style={{ flex: '1 1 300px' }}>
-    <PromptSandbox title="Platform B Response" apiEndpoint="/api/chatbot-b" initialPrompt="Explain the difference between analysis and design in engineering." />
+    <PromptSandbox title="Platform B Response" showTools="claude" initialPrompt="Explain the difference between analysis and design in engineering." />
   </div>
 </div>
 
