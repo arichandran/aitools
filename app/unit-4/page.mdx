@@ -8,7 +8,45 @@ import PromptSandbox from "@/components/PromptSandbox";
 
 ### <a id="_Toc239677996"></a>4\.1 AI Coding Assistants: Generation, Explanation, and Debugging
 
-AI coding assistants operate at three levels of support: \(a\) code generation — writing new code from a natural\-language description; \(b\) code explanation — describing what an existing, possibly unfamiliar, piece of code does line by line or as a whole; and \(c\) debugging — identifying why a program produces incorrect output or crashes, and proposing a fix\. Tools like GitHub Copilot and Cursor work inline inside an editor, suggesting completions as the student types, while conversational tools \(ChatGPT, Claude\) work through a chat interface where the student pastes code and describes the problem\. Claude Code and similar agentic tools go further, autonomously reading multiple files in a project, running the code, and iterating on fixes with minimal step\-by\-step guidance\.
+AI coding assistants operate at three distinct levels of developer support:
+
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Level of Support</th>
+      <th>Primary Capability</th>
+      <th>Typical Student Prompt</th>
+      <th>Primary Tools</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Code Generation</strong></td>
+      <td>Synthesising new programs, functions, or boilerplates from natural-language specifications.</td>
+      <td><code>"Write a Python program to convert Celsius to Fahrenheit with user input validation."</code></td>
+      <td>GitHub Copilot, Cursor, ChatGPT</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Code Explanation</strong></td>
+      <td>Deconstructing complex, unfamiliar, or legacy algorithms line by line.</td>
+      <td><code>"Explain this recursive quicksort function and trace it with array [5, 2, 9, 1]."</code></td>
+      <td>Claude, ChatGPT, Cursor</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Debugging & Fixes</strong></td>
+      <td>Diagnosing syntax errors, runtime crashes, and logic bugs from error traces.</td>
+      <td><code>"This prime-checker function returns True for 1. Find and correct the bug."</code></td>
+      <td>Claude Code, GitHub Copilot, Cursor</td>
+    </tr>
+  </tbody>
+</table>
+
+Tools like GitHub Copilot and Cursor work inline inside an editor, suggesting completions as the student types, while conversational tools (ChatGPT, Claude) work through a chat interface where the student pastes code and describes the problem. Claude Code and similar agentic tools go further, autonomously reading multiple files in a project, running the code, and iterating on fixes with minimal step-by-step guidance.
 
 ### <a id="_Toc239677997"></a>4\.2 AI Writing Assistants for Reports, Emails, and Documentation
 
@@ -24,60 +62,64 @@ Given a topic and target duration, tools such as Gamma or a conversational AI ca
 
 ### <a id="_Toc239678000"></a>4\.5 Integrating AI Tools into a Day\-to\-Day Academic and Engineering Workflow
 
-A mature AI\-augmented workflow assigns each stage of a task to the tool best suited for it \(see Unit 1, Section 1\.4 selection criteria\), while keeping a human decision point at the end of every stage\. A typical weekly student workflow might look like:
+A mature AI-augmented workflow assigns each stage of a task to the tool best suited for it (see Unit 1, Section 1.4 selection criteria), while keeping a human decision point at the end of every stage. A typical weekly student workflow might look like:
 
-__Stage__
 
-__Tool Type__
-
-__Human Checkpoint__
-
-Capture lecture notes
-
-Note\-taking / transcription AI
-
-Confirm no key formula or step was dropped
-
-Draft lab report
-
-Writing assistant
-
-Verify data, calculations, and conclusions are accurate
-
-Debug lab code
-
-Coding assistant
-
-Understand and test the proposed fix before submitting
-
-Prepare seminar slides
-
-Slide\-outline generator
-
-Check technical accuracy and remove any unverified claim
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Workflow Stage</th>
+      <th>Tool Type</th>
+      <th>Mandatory Human Checkpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Capture lecture notes</strong></td>
+      <td>Note-taking / transcription AI</td>
+      <td>Confirm no key formula, theorem, or derivation step was dropped.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Draft lab report</strong></td>
+      <td>Writing assistant</td>
+      <td>Verify data tables, calculations, and analytical conclusions are accurate.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Debug lab code</strong></td>
+      <td>Coding assistant</td>
+      <td>Understand the underlying cause and test the proposed fix before submitting.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Prepare seminar slides</strong></td>
+      <td>Slide-outline generator</td>
+      <td>Check technical accuracy and remove any unverified or hallucinated claims.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### <a id="_Toc239678001"></a>2\. List of Experiments
 
 ### <a id="_Toc239678002"></a>Experiment 1: Generate a Program, Introduce a Bug, and Have the AI Debug It
 
-Task: Use an AI coding assistant to generate a simple program \(e\.g\., a temperature converter\), then intentionally introduce a bug and have the AI debug it\.
+Task: Use an AI coding assistant to generate a simple program (e.g., a temperature converter), then intentionally introduce a bug and have the AI debug it.
 
 <details>
 
 <summary><b>Worked Solution — Step 1: Generate the correct program</b></summary>
 
+Prompt: `"Write a Python program that converts a temperature from Celsius to Fahrenheit, taking user input."`
 
-Prompt: "Write a Python program that converts a temperature from Celsius to Fahrenheit, taking user input\."
-
-\# Correct version
-
-celsius = float\(input\("Enter temperature in Celsius: "\)\)
-
-fahrenheit = \(celsius \* 9/5\) \+ 32
-
-print\(f"\{celsius\} Celsius is equal to \{fahrenheit\} Fahrenheit"\)
-
-
+```python
+# Correct version
+celsius = float(input("Enter temperature in Celsius: "))
+fahrenheit = (celsius * 9/5) + 32
+print(f"{celsius} Celsius is equal to {fahrenheit} Fahrenheit")
+```
 
 </details>
 
@@ -91,40 +133,83 @@ print("Expected: 212.0 —", "CORRECT" if fahrenheit == 212.0 else "WRONG")`} />
 
 __*Step 2: Intentionally introduce a bug*__
 
-\# Buggy version \(operator precedence error\)
+```python
+# Buggy version (operator precedence error)
+celsius = float(input("Enter temperature in Celsius: "))
+fahrenheit = celsius * 9/5 + 32 / 9   # bug: 32 wrongly divided by 9
+print(f"{celsius} Celsius is equal to {fahrenheit} Fahrenheit")
+```
 
-celsius = float\(input\("Enter temperature in Celsius: "\)\)
-
-fahrenheit = celsius \* 9/5 \+ 32 / 9   \# bug: 32 wrongly divided by 9
-
-print\(f"\{celsius\} Celsius is equal to \{fahrenheit\} Fahrenheit"\)
-
-Test case: for celsius = 100, the buggy code computes 100\*9/5 \+ 32/9 = 180 \+ 3\.56 = 183\.56°F, whereas the correct answer is 212°F\.
+Test case: for celsius = 100, the buggy code computes 100 * 9/5 + 32/9 = 180 + 3.56 = 183.56°F, whereas the correct answer is 212.0°F.
 
 __*Step 3: Ask the AI to debug*__
 
-"This Celsius\-to\-Fahrenheit converter gives 183\.56 for an input of 100, but the correct answer is 212\. Find and fix the bug\."
+Prompt: `"This Celsius-to-Fahrenheit converter gives 183.56 for an input of 100, but the correct answer is 212. Find and fix the bug."`
 
-Expected AI diagnosis: the formula should be \(celsius \* 9/5\) \+ 32, but the code instead adds '32/9' instead of a standalone '32' — due to missing parentheses / misplaced division, 32 is being divided by 9 rather than added as a whole constant\. Corrected line: fahrenheit = \(celsius \* 9/5\) \+ 32\.
+Expected AI diagnosis: the formula should be `(celsius * 9/5) + 32`, but the code instead adds `32/9` due to operator precedence and missing parentheses.
+
+**Code Version Comparison and Debugging Summary:**
+
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Code Version</th>
+      <th>Formula Implementation</th>
+      <th>Test Input (100°C)</th>
+      <th>Result Observed</th>
+      <th>Assessment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Correct Base</strong></td>
+      <td><code>(celsius * 9/5) + 32</code></td>
+      <td>100°C</td>
+      <td>212.0°F</td>
+      <td><strong>Correct</strong>: Follows standard thermodynamic formula.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Buggy Version</strong></td>
+      <td><code>celsius * 9/5 + 32 / 9</code></td>
+      <td>100°C</td>
+      <td>183.56°F</td>
+      <td><strong>Buggy</strong>: Operator precedence error; 32 is wrongly divided by 9.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>AI-Fixed Version</strong></td>
+      <td><code>(celsius * 9/5) + 32</code></td>
+      <td>100°C</td>
+      <td>212.0°F</td>
+      <td><strong>Resolved</strong>: Restores explicit parentheses around scale factor and adds 32.</td>
+    </tr>
+  </tbody>
+</table>
 
 __*Key Concepts Applied*__
 
-- Debugging requires giving the AI both the code and the observed\-vs\-expected behaviour \(a failing test case\), not just the code alone — this mirrors real\-world bug reports\.
-- The root cause here is an operator\-precedence / grouping mistake, one of the most common categories of beginner programming bugs\.
+- Debugging requires giving the AI both the code and the observed-vs-expected behaviour (a failing test case), not just the code alone — this mirrors real-world bug reports.
+- The root cause here is an operator-precedence / grouping mistake, one of the most common categories of beginner programming bugs.
 
 <details>
 
 <summary><b>Expected Output</b></summary>
 
-
-Corrected program that, for celsius = 100, prints "100\.0 Celsius is equal to 212\.0 Fahrenheit", matching the expected value\.
-
-
+Corrected program that, for celsius = 100, prints "100.0 Celsius is equal to 212.0 Fahrenheit", matching the expected value.
 
 </details>
 
 <br/>
-<PromptSandbox initialPrompt="This Celsius-to-Fahrenheit converter gives 183.56 for an input of 100, but the correct answer is 212. Find and fix the bug.\n\nBuggy code:\ncelsius = float(input('Enter temperature in Celsius: '))\nfahrenheit = celsius * 9/5 + 32 / 9\nprint(f'{celsius} Celsius is equal to {fahrenheit} Fahrenheit')" />
+<PromptSandbox initialPrompt="This Celsius-to-Fahrenheit converter gives 183.56 for an input of 100, but the correct answer is 212. Find and fix the bug.
+
+Buggy code:
+celsius = float(input('Enter temperature in Celsius: '))
+fahrenheit = celsius * 9/5 + 32 / 9
+print(f'{celsius} Celsius is equal to {fahrenheit} Fahrenheit')" />
 
 <br/>
 <CodeReference code={`# Step 2: Run the BUGGY version to observe the wrong output
@@ -140,52 +225,57 @@ print("Bug was: '32 / 9' instead of standalone '32' (operator precedence error)"
 
 ### <a id="_Toc239678003"></a>Experiment 2: Generate a Presentation Outline and Speaker Notes
 
-Task: Generate a presentation outline and speaker notes from a topic prompt using an AI writing/productivity tool\.
+Task: Generate a presentation outline and speaker notes from a topic prompt using an AI writing/productivity tool.
 
 <details>
 
-<summary><b>Worked Solution</b></summary>
+<summary><b>Worked Solution — 5-Slide Seminar Presentation Plan</b></summary>
+
+Prompt: `"Create a 5-slide outline with speaker notes for a 5-minute seminar on 'Introduction to Generative AI', aimed at first-year engineering students."`
 
 
-Prompt: "Create a 5\-slide outline with speaker notes for a 5\-minute seminar on 'Introduction to Generative AI', aimed at first\-year engineering students\."
-
-__Slide__
-
-__Title & Bullet Points__
-
-__Speaker Notes \(summary\)__
-
-1
-
-Title: What is Generative AI? — Definition; contrast with traditional AI/ML
-
-Open with a relatable example \(e\.g\., ChatGPT\) before defining the term formally\.
-
-2
-
-How It Works — Trained on large text data; predicts next word; Transformer architecture \(conceptual\)
-
-Keep this non\-mathematical; use the 'autocomplete on steroids' analogy\.
-
-3
-
-Popular Tools & Categories — Text, image, code, data tools \(recap Unit 1 table\)
-
-Briefly name 1\-2 tools per category so the audience recognises real products\.
-
-4
-
-Real\-World Applications — Writing help, coding assistance, data analysis, design
-
-Give one concrete campus\-relevant example per application\.
-
-5
-
-Risks & Responsible Use — Hallucination, bias, academic integrity, data privacy
-
-End on a balanced note: powerful but requires verification and ethical use\.
-
-
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Slide Number & Topic</th>
+      <th>Slide Title & Key Bullet Points</th>
+      <th>Speaker Notes (Summary)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Slide 1</strong></td>
+      <td><strong>What is Generative AI?</strong><br/>• Definition and scope<br/>• Contrast with traditional rule-based AI/ML</td>
+      <td>Open with a relatable everyday example (e.g., ChatGPT) before stating formal computer science definitions.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Slide 2</strong></td>
+      <td><strong>How It Works</strong><br/>• Trained on vast text corpora<br/>• Next-token prediction mechanics<br/>• Transformer attention architecture</td>
+      <td>Keep explanations conceptual; use the intuitive 'autocomplete on steroids' metaphor for non-specialist clarity.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Slide 3</strong></td>
+      <td><strong>Popular Tools & Categories</strong><br/>• Conversational, code, and data tools<br/>• Visual synthesis and productivity</td>
+      <td>Name 1–2 leading real-world tools per category so students recognise actual software products.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Slide 4</strong></td>
+      <td><strong>Real-World Campus Applications</strong><br/>• Report structuring, coding assistance<br/>• Data exploration and slide preparation</td>
+      <td>Provide concrete, campus-relevant examples showing how each tool aids engineering student workflows.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>5</td>
+      <td><strong>Slide 5</strong></td>
+      <td><strong>Risks & Responsible Use</strong><br/>• Hallucination, bias, data privacy<br/>• Academic integrity and citation rules</td>
+      <td>Conclude on a balanced note: AI is an amplifier requiring rigorous verification and ethical responsibility.</td>
+    </tr>
+  </tbody>
+</table>
 
 </details>
 
@@ -194,139 +284,227 @@ End on a balanced note: powerful but requires verification and ethical use\.
 
 __*Key Concepts Applied*__
 
-- The outline respects the '5 minutes → 5 slides' pacing constraint \(roughly one minute per slide\), which the student should always specify explicitly in the prompt\.
-- Ending on Slide 5 with risks and responsible use previews Unit 5 and reflects good academic practice for any AI\-related presentation\.
+- The outline respects the '5 minutes → 5 slides' pacing constraint (roughly one minute per slide), which the student should always specify explicitly in the prompt.
+- Ending on Slide 5 with risks and responsible use previews Unit 5 and reflects good academic practice for any AI-related presentation.
 
 <details>
 
 <summary><b>Expected Output</b></summary>
 
-
-A 5\-row outline \(as above\) that a student can directly paste into presentation software, with each speaker\-note summary expandable into full spoken sentences during rehearsal\.
-
-
+A 5-row outline (as above) that a student can directly paste into presentation software, with each speaker-note summary expandable into full spoken sentences during rehearsal.
 
 </details>
 
 ### <a id="_Toc239678004"></a>Experiment 3: Write and Debug a Simple Program Using an AI Coding Tool
 
-Problem: Use an AI coding tool to write and debug a simple program for a given problem statement\.
+Problem: Use an AI coding tool to write and debug a simple program for a given problem statement.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-Problem statement: Write a program that checks whether a given number is prime\.
+Problem statement: Write a program that checks whether a given number is prime.
 
-\# Initial AI\-generated version \(contains an off\-by\-one bug\)
-
-def is\_prime\(n\):
-
+```python
+# Initial AI-generated version (contains efficiency limitation)
+def is_prime(n):
     if n < 2:
-
         return False
-
-    for i in range\(2, n\):        \# bug: should stop at sqrt\(n\), and range\(2, n\) misses n\-1 as a valid non\-factor check is fine, but inefficient AND fails for n where n itself equals a boundary — real bug demo below
-
+    for i in range(2, n):        # checks up to n-1 unnecessarily
         if n % i == 0:
-
             return False
-
     return True
 
- 
+print(is_prime(1))   # False
+print(is_prime(2))   # True
+```
 
-print\(is\_prime\(1\)\)   \# should be False \-> check
+Testing reveals `is_prime(1)` correctly returns `False` and `is_prime(2)` returns `True`, but the loop `range(2, n)` is inefficient for large n.
 
-print\(is\_prime\(2\)\)   \# should be True
+Debugging / optimisation prompt: `"This prime-checking function works correctly but is slow for large numbers. Optimise it."`
 
-Testing reveals is\_prime\(1\) correctly returns False and is\_prime\(2\) correctly returns True, but the loop range\(2, n\) is inefficient for large n \(checks up to n\-1 unnecessarily\)\. Debugging prompt: "This prime\-checking function works correctly but is slow for large numbers\. Optimise it\."
-
-\# Optimised version
-
-def is\_prime\(n\):
-
+```python
+# Optimised version
+def is_prime(n):
     if n < 2:
-
         return False
-
-    for i in range\(2, int\(n \*\* 0\.5\) \+ 1\):   \# only check up to sqrt\(n\)
-
+    for i in range(2, int(n ** 0.5) + 1):   # only check up to sqrt(n)
         if n % i == 0:
-
             return False
-
     return True
+```
+
+**Algorithm Optimization Comparison:**
+
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Version</th>
+      <th>Loop Range Strategy</th>
+      <th>Time Complexity</th>
+      <th>Performance & Scalability</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Initial Draft</strong></td>
+      <td><code>range(2, n)</code></td>
+      <td>O(n)</td>
+      <td>Inefficient: Checks redundant factors beyond √n; slows noticeably for large numbers.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Optimised</strong></td>
+      <td><code>range(2, int(n<em></em>0.5) + 1)</code></td>
+      <td>O(√n)</td>
+      <td>Highly Efficient: Stops at square root since factors pair up; handles large primes effortlessly.</td>
+    </tr>
+  </tbody>
+</table>
 
 __*Explanation of Approach*__
 
-Correctness and efficiency are two separate concerns: the original code was not factually wrong, but was needlessly slow, since any factor larger than the square root of n must pair with a factor smaller than the square root — checking beyond √n is redundant\. This distinction \(bug vs inefficiency\) is an important lesson for beginner programmers\.
+Correctness and efficiency are two separate concerns: the original code was not factually wrong, but was needlessly slow, since any factor larger than the square root of $n$ must pair with a factor smaller than the square root — checking beyond √n is redundant. This distinction (bug vs inefficiency) is an important lesson for beginner programmers.
 
 <br/>
-<PromptSandbox initialPrompt="This Python function checks for prime numbers but is very slow for large numbers. Can you optimize it to run faster?\n\ndef is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, n):\n        if n % i == 0:\n            return False\n    return True" />
+<PromptSandbox initialPrompt="This Python function checks for prime numbers but is very slow for large numbers. Can you optimize it to run faster?
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True" />
 <PyodideRunner />
 
 ### <a id="_Toc239678005"></a>Experiment 4: Draft a Formal Email or Report and Manually Edit It
 
-Problem: Draft a formal email or short report using an AI writing assistant, then manually edit it for accuracy and tone\.
+Problem: Draft a formal email or short report using an AI writing assistant, then manually edit it for accuracy and tone.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-Scenario: requesting a one\-day extension for a lab report submission\.
+Scenario: requesting a one-day extension for a lab report submission.
 
-AI\-drafted version \(typical first pass\):
+**AI Draft (Typical Generic First Pass):**
+> *"Dear Sir/Madam, I am writing to request an extension for my lab report submission due to unforeseen circumstances. I would be grateful if you could grant me one additional day. Thank you for your understanding. Sincerely, [Name]"*
 
-__AI Draft:__
+**Edited Final Version (Personalised & Factually Truthful):**
+> *"Dear Dr. [Surname], I am writing to request a one-day extension on the Data Structures lab report (due Friday), as our lab system was down for maintenance on Wednesday afternoon, delaying my final test runs. I would be grateful for submission until Saturday evening. Thank you for considering this request. Regards, [Full Name], Roll No. [XXXX]"*
 
-"Dear Sir/Madam, I am writing to request an extension for my lab report submission due to unforeseen circumstances\. I would be grateful if you could grant me one additional day\. Thank you for your understanding\. Sincerely, \[Name\]"
+**Detailed Comparative Editing Breakdown:**
 
-Manual edit for accuracy and tone \(student adds specific, truthful detail and addresses the actual professor by name/designation, since a vague 'unforeseen circumstances' reads as evasive and unverifiable\):
 
-__Edited Final Version:__
-
-"Dear Dr\. \[Surname\], I am writing to request a one\-day extension on the Data Structures lab report \(due Friday\), as our lab system was down for maintenance on Wednesday afternoon, delaying my final test runs\. I would be grateful for submission until Saturday evening\. Thank you for considering this request\. Regards, \[Full Name\], Roll No\. \[XXXX\]"
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Email Element</th>
+      <th>AI First Draft (Generic)</th>
+      <th>Student-Edited Final (Personalised)</th>
+      <th>Pedagogical Improvement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Salutation</strong></td>
+      <td><code>"Dear Sir/Madam,"</code></td>
+      <td><code>"Dear Dr. [Surname],"</code></td>
+      <td>Professional respect; addresses specific course instructor.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Context & Subject</strong></td>
+      <td><code>"request an extension for my lab report submission"</code></td>
+      <td><code>"request a one-day extension on the Data Structures lab report (due Friday)"</code></td>
+      <td>Identifies exact subject, assignment title, and original deadline.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Justification</strong></td>
+      <td><code>"due to unforeseen circumstances"</code></td>
+      <td><code>"as our lab system was down for maintenance on Wednesday afternoon..."</code></td>
+      <td>Replaces evasive generic excuse with verifiable, truthful rationale.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Sign-off & ID</strong></td>
+      <td><code>"Sincerely, [Name]"</code></td>
+      <td><code>"Regards, [Full Name], Roll No. [XXXX]"</code></td>
+      <td>Furnishes complete institutional student credentials for verification.</td>
+    </tr>
+  </tbody>
+</table>
 
 __*Explanation of Approach*__
 
-The AI draft provides correct structure and formal tone instantly, but the student must replace generic, unverifiable phrases \('unforeseen circumstances'\) with specific, true, checkable details, and add identifying information \(name, roll number\) the AI could not have known — this is the core of the 'draft, then verify and personalise' workflow from Section 4\.2\.
+The AI draft provides correct structure and formal tone instantly, but the student must replace generic, unverifiable phrases ('unforeseen circumstances') with specific, true, checkable details, and add identifying information (name, roll number) the AI could not have known — this is the core of the 'draft, then verify and personalise' workflow from Section 4.2.
 
 <br/>
 <PromptSandbox initialPrompt="Draft a formal, polite email to my professor requesting a one-day extension for my Data Structures lab report. Explain that I need the extension due to unforeseen circumstances." />
 
 ### <a id="_Toc239678006"></a>Experiment 5: Generate a Slide Outline for a 5\-Minute Seminar and Refine It
 
-Problem: Generate a slide outline for a 5\-minute seminar topic using an AI tool and refine it\.
+Problem: Generate a slide outline for a 5-minute seminar topic using an AI tool and refine it.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-Chosen topic: 'Basics of Cloud Computing'\.
+Chosen topic: 'Basics of Cloud Computing'.
 
-Initial AI\-generated outline \(first pass, before refinement\) — typically 8\-10 dense slides covering history, deployment models, service models, providers, and future trends all at once, too much for 5 minutes\.
+Initial AI-generated outline (first pass, before refinement) — typically 8-10 dense slides covering history, deployment models, service models, providers, and future trends all at once, too much for 5 minutes.
 
-Refinement prompt: "This outline has too much content for a 5\-minute talk\. Condense it to exactly 4 slides, keeping only the most essential points a first\-year student needs\."
+Refinement prompt: `"This outline has too much content for a 5-minute talk. Condense it to exactly 4 slides, keeping only the most essential points a first-year student needs."`
 
-__Slide__
+**Refined 4-Slide Outline:**
 
-__Content__
 
-1
-
-What is Cloud Computing? — On\-demand computing resources over the internet, pay\-as\-you\-go
-
-2
-
-Service Models — IaaS, PaaS, SaaS with one everyday example each \(e\.g\., SaaS = Gmail\)
-
-3
-
-Why It Matters — Cost savings, scalability, no need to own physical hardware
-
-4
-
-Real Providers — AWS, Microsoft Azure, Google Cloud \(one line each\)
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Slide Number</th>
+      <th>Slide Title</th>
+      <th>Core Content Points</th>
+      <th>Target Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Slide 1</strong></td>
+      <td><strong>What is Cloud Computing?</strong></td>
+      <td>On-demand computing resources over the internet with pay-as-you-go pricing.</td>
+      <td>~1.0 min</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Slide 2</strong></td>
+      <td><strong>Service Models (IaaS, PaaS, SaaS)</strong></td>
+      <td>Infrastructure (AWS EC2), Platform (Heroku), Software (Gmail / Google Docs).</td>
+      <td>~1.5 min</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Slide 3</strong></td>
+      <td><strong>Why Cloud Matters</strong></td>
+      <td>Capital cost reduction, instant global scalability, high availability without physical hardware.</td>
+      <td>~1.5 min</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Slide 4</strong></td>
+      <td><strong>Leading Cloud Providers</strong></td>
+      <td>AWS, Microsoft Azure, Google Cloud Platform (key market offerings).</td>
+      <td>~1.0 min</td>
+    </tr>
+  </tbody>
+</table>
 
 __*Explanation of Approach*__
 
-The exercise demonstrates the same iterative\-refinement principle taught in Unit 2 \(Section 2\.4\) applied specifically to slide generation: the first AI pass over\-includes content, and a targeted refinement instruction \('condense to exactly 4 slides, keep only essentials'\) produces a presentation that actually fits the stated time constraint\.
+The exercise demonstrates the same iterative-refinement principle taught in Unit 2 (Section 2.4) applied specifically to slide generation: the first AI pass over-includes content, and a targeted refinement instruction ('condense to exactly 4 slides, keep only essentials') produces a presentation that actually fits the stated time constraint.
 
 <br/>
 <PromptSandbox initialPrompt="This outline has too much content for a 5-minute talk. Condense it to exactly 4 slides, keeping only the most essential points a first-year student needs." />
-

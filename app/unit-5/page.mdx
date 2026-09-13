@@ -7,16 +7,49 @@ import PromptSandbox from "@/components/PromptSandbox";
 
 ### <a id="_Toc239678009"></a>5\.1 Bias and Hallucination in AI Outputs
 
-Hallucination refers to an AI model generating text that is fluent and confident\-sounding but factually incorrect or entirely fabricated — for example, inventing a citation, a statistic, or a historical date that does not exist\. This happens because, as explained in Unit 1 \(Section 1\.3\), an LLM generates the statistically most plausible next token, not a verified fact; when it lacks reliable information on a topic, it can still produce a plausible\-sounding but false continuation rather than admitting uncertainty\.
+Hallucination refers to an AI model generating text that is fluent and confident-sounding but factually incorrect or entirely fabricated — for example, inventing a citation, a statistic, or a historical date that does not exist. This happens because, as explained in Unit 1 (Section 1.3), an LLM generates the statistically most plausible next token, not a verified fact; when it lacks reliable information on a topic, it can still produce a plausible-sounding but false continuation rather than admitting uncertainty.
 
-Bias refers to systematic skew in a model's outputs that reflects imbalances or stereotypes present in its training data — for instance, associating certain professions more strongly with one gender, or giving less accurate answers about regions/cultures underrepresented in the training corpus\. Both hallucination and bias are technical properties of how these models are built, not intentional deception, but they carry the same practical implication: every AI output requires human judgement before being trusted or acted upon\.
+Bias refers to systematic skew in a model's outputs that reflects imbalances or stereotypes present in its training data — for instance, associating certain professions more strongly with one gender, or giving less accurate answers about regions/cultures underrepresented in the training corpus. Both hallucination and bias are technical properties of how these models are built, not intentional deception, but they carry the same practical implication: every AI output requires human judgement before being trusted or acted upon.
 
-Techniques for detecting and fact\-checking:
+**Techniques for Detecting and Fact-Checking Hallucinations:**
 
-- __Cross\-verification — __check any specific factual claim \(a date, statistic, or quotation\) against at least one independent, authoritative source \(textbook, official website, peer\-reviewed paper\)\.
-- __Ask for sources — __prompt the AI to cite where a claim comes from; if it cannot, or the cited source does not actually contain the claim when checked, treat the claim as unverified\.
-- __Use tools with built\-in citation — __tools like Perplexity attach live web citations to their claims, making verification faster than with a model that has no search grounding\.
-- __Sanity\-check plausibility — __does the number/fact fit known orders of magnitude and context? An oddly precise or surprising figure deserves extra scrutiny\.
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Fact-Checking Technique</th>
+      <th>Operational Procedure</th>
+      <th>Concrete Student Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Cross-Verification</strong></td>
+      <td>Check any factual claim (dates, formulas, statistics) against an independent authoritative source.</td>
+      <td>Cross-check AI-quoted theorems against your prescribed textbook or IEEE/ACM papers.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Source Grounding</strong></td>
+      <td>Explicitly prompt the AI to supply exact citations, authors, and DOIs.</td>
+      <td>If the AI cannot name the book or page, or if the cited page contains no such claim, reject it.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Citation-Enabled Tools</strong></td>
+      <td>Employ search-grounded models with real-time web retrieval rather than pure LLMs.</td>
+      <td>Use tools like Perplexity AI or Consensus when gathering scientific citations and claims.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Plausibility Sanity Check</strong></td>
+      <td>Evaluate whether numerical values and physical quantities conform to reality.</td>
+      <td>Verify orders of magnitude (e.g., catching impossible efficiencies, dates, or calculations).</td>
+    </tr>
+  </tbody>
+</table>
 
 ### <a id="_Toc239678010"></a>5\.2 Academic Integrity and Citation of AI Assistance
 
@@ -24,16 +57,49 @@ Most universities, including JNTUK\-affiliated institutions, now require student
 
 ### <a id="_Toc239678011"></a>5\.3 Data Privacy and Security — the DPDP Act, 2023
 
-India's Digital Personal Data Protection Act, 2023 \(DPDP Act\) governs how personal data of individuals \('Data Principals'\) may be collected, processed, and stored by any entity \('Data Fiduciary'\), including AI tool providers\. For a student or faculty member uploading data to an AI tool, key considerations include:
+India's Digital Personal Data Protection Act, 2023 (DPDP Act) governs how personal data of individuals ('Data Principals') may be collected, processed, and stored by any entity ('Data Fiduciary'), including AI tool providers. For a student or faculty member uploading data to an AI tool, key considerations include:
 
-- __Consent — __personal data \(e\.g\., another student's name, roll number, marks, contact details\) should not be uploaded to a third\-party AI tool without a lawful basis or the concerned person's consent\.
-- __Purpose limitation — __data should only be used for the purpose it was collected for; feeding institutional student records into a public AI chatbot for an unrelated purpose could violate this principle\.
-- __Data minimisation — __only the minimum data necessary for the task should be shared — e\.g\., anonymising or removing names/roll numbers before uploading a marks dataset for a statistics exercise, when the actual identities are not required for the analysis\.
-- __Vendor data\-retention policy — __check whether the AI tool retains uploaded data, and whether it may be used to train future models, before uploading anything sensitive or institutional\.
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>DPDP Act Principle</th>
+      <th>Legal & Regulatory Requirement</th>
+      <th>Course & Laboratory Compliance Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Consent</strong></td>
+      <td>Personal data may only be processed with lawful, explicit consent from the Data Principal.</td>
+      <td>Never upload classmates' names, phone numbers, or marksheets to an AI tool without consent.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Purpose Limitation</strong></td>
+      <td>Data must be processed solely for the specific purpose for which it was originally collected.</td>
+      <td>Do not feed institutional student records into public chatbots where data may be repurposed.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Data Minimisation</strong></td>
+      <td>Collect and share only the bare minimum data necessary to complete the task.</td>
+      <td>Anonymise names and identifiers (replace with S1, S2, ...) before running data analysis.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Vendor Retention & Erasure</strong></td>
+      <td>Users retain the legal right to have personal data deleted by the Data Fiduciary.</td>
+      <td>Turn off 'Chat History & Model Training' settings in tools to prevent long-term data storage.</td>
+    </tr>
+  </tbody>
+</table>
 
 __Practical guideline for this course:__
 
-When practising the data\-analysis exercises in Unit 3 with real class data, always anonymise names \(replace with S1, S2, \.\.\. as done in this material\) before uploading to any AI tool\.
+When practising the data-analysis exercises in Unit 3 with real class data, always anonymise names (replace with S1, S2, ... as done in this material) before uploading to any AI tool.
 
 ### <a id="_Toc239678012"></a>5\.4 Copyright and Intellectual Property in AI\-Generated Content
 
@@ -47,82 +113,137 @@ Multimodal AI refers to models that can accept and/or generate more than one typ
 
 ### <a id="_Toc239678015"></a>Experiment 1: A Documented Case of AI Hallucination and How to Fact\-Check It
 
-Task: Show a documented case of AI hallucination \(a fabricated fact or citation\) and demonstrate how to fact\-check it\.
+Task: Show a documented case of AI hallucination (a fabricated fact or citation) and demonstrate how to fact-check it.
 
 <details>
 
-<summary><b>Worked Solution</b></summary>
+<summary><b>Worked Solution — Fact-Checking Procedure</b></summary>
+
+Illustrative scenario: A student asks an AI chatbot, *"Give me the exact page number and quotation from Russell and Norvig's 'Artificial Intelligence: A Modern Approach' that defines a rational agent."* A model without live document access may respond with a highly specific-sounding but fabricated citation, e.g., inventing a page number and a quotation that does not actually appear verbatim on that page.
+
+**Step-by-Step Fact-Checking Protocol:**
 
 
-Illustrative scenario: A student asks an AI chatbot, "Give me the exact page number and quotation from Russell and Norvig's 'Artificial Intelligence: A Modern Approach' that defines a rational agent\." A model without live document access may respond with a highly specific\-sounding but fabricated citation, e\.g\., inventing a page number and a quotation that does not actually appear verbatim on that page, or attributing it to the wrong edition — this is a hallucinated citation, a well\-documented and common failure mode precisely because specific page numbers and exact quotations are the kind of narrow, verifiable detail LLMs are most likely to invent confidently\.
-
-Fact\-checking procedure:
-
-1. Never accept a specific page number or exact quotation from an AI tool without independent access to the actual source\.
-2. Open the actual textbook \(physical copy, official e\-book, or publisher's preview\) and search the relevant chapter for the concept \(rational agent\)\.
-3. Compare the AI's claimed wording against the book's actual wording; if they don't match, or the cited page doesn't discuss that concept at all, the citation is confirmed hallucinated\.
-4. Use only the definition as found in the verified original source in any academic submission, citing the real page number\.
-
-
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Procedural Step</th>
+      <th>Verification Action</th>
+      <th>Evaluation Outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Identify Citation Claim</strong></td>
+      <td>Record the AI's claimed book, author, chapter, page number, and quote.</td>
+      <td>Flag specific page numbers and verbatim quotes as high-risk hallucination targets.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Access Original Source</strong></td>
+      <td>Consult the official physical textbook, library e-book, or publisher copy.</td>
+      <td>Search the specified chapter and page for the claimed definition.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Compare Verbatim Text</strong></td>
+      <td>Cross-examine the AI-generated quote against the actual printed text.</td>
+      <td>If text does not exist or differs in meaning, confirm as a <strong>hallucination</strong>.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Cite Authentic Reference</strong></td>
+      <td>Extract the real quotation and correct page number for coursework.</td>
+      <td>Ensure full academic honesty by citing verified original sources only.</td>
+    </tr>
+  </tbody>
+</table>
 
 </details>
 
 __*Key Concepts Applied*__
 
-- This illustrates Section 5\.1's point that hallucinations are most dangerous exactly where they sound most authoritative — a specific page number feels more trustworthy than a vague claim, yet is often less reliable when unverifiable against a live source\.
-- The correct response is not to distrust AI entirely, but to use it for locating which concept/chapter to look up, while sourcing the exact quotation from the original\.
+- This illustrates Section 5.1's point that hallucinations are most dangerous exactly where they sound most authoritative — a specific page number feels more trustworthy than a vague claim, yet is often less reliable when unverifiable against a live source.
+- The correct response is not to distrust AI entirely, but to use it for locating which concept/chapter to look up, while sourcing the exact quotation from the original.
 
 <details>
 
 <summary><b>Expected Output</b></summary>
 
-
-A short written note documenting: the AI's claimed citation, the verified actual text \(or confirmation that no such passage exists at the cited location\), and the corrected, properly\-sourced citation for use in coursework\.
-
-
+A short written note documenting: the AI's claimed citation, the verified actual text (or confirmation that no such passage exists at the cited location), and the corrected, properly-sourced citation for use in coursework.
 
 </details>
 
 <br/>
 <PromptSandbox initialPrompt="Give me the exact page number and quotation from Russell and Norvig's 'Artificial Intelligence: A Modern Approach' that defines a rational agent." />
+
 ### <a id="_Toc239678016"></a>Experiment 2: Properly Citing AI Assistance in an Academic Submission
 
-Task: Walk through an example of properly citing AI assistance in an academic submission per institutional guidelines\.
+Task: Walk through an example of properly citing AI assistance in an academic submission per institutional guidelines.
 
 <details>
 
-<summary><b>Worked Solution</b></summary>
+<summary><b>Worked Solution — AI-Usage Disclosure Framework</b></summary>
+
+Scenario: A student used Claude to help brainstorm test cases for a lab assignment and to check grammar in the final report, but wrote all the code and analysis themselves.
+
+**AI-Usage Declaration Structural Breakdown:**
 
 
-Scenario: A student used Claude to help brainstorm test cases for a lab assignment and to check grammar in the final report, but wrote all the code and analysis themselves\.
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Declaration Component</th>
+      <th>Specification Required</th>
+      <th>Exemplar Student Submission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>AI Tool & Version</strong></td>
+      <td>Name the specific tool(s) and provider used.</td>
+      <td>Claude 3.5 Sonnet (Anthropic)</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Purpose of Use</strong></td>
+      <td>Specify exactly which assignment tasks used AI.</td>
+      <td>Brainstorming edge-case test inputs and language editing.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Extent of Contribution</strong></td>
+      <td>Define boundary between AI output and student work.</td>
+      <td>No code logic or analytical conclusions were generated; 100% student work.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Verification Confirmation</strong></td>
+      <td>State how the AI assistance was manually checked.</td>
+      <td>All suggested test inputs were manually coded, executed, and verified against specs.</td>
+    </tr>
+  </tbody>
+</table>
 
-Step 1 — Identify exactly which parts involved AI assistance: \(a\) brainstorming edge\-case test inputs for the program, \(b\) grammar/spelling check of the final write\-up\. The code logic, implementation, and analysis were the student's own work\.
-
-Step 2 — Draft an AI\-usage declaration, following the common structure: tool name, purpose of use, extent of use, and confirmation of independent verification\.
-
-__Model AI\-Usage Declaration:__
-
-"AI Tool Used: Claude \(Anthropic\)\. Purpose: \(1\) Brainstorming additional edge\-case test inputs \(e\.g\., empty input, negative numbers\) for the sorting program in Section 3; \(2\) Grammar and spelling check of the final report text\. Extent: No code logic or analysis was AI\-generated; all algorithm design, implementation, and result interpretation are the student's own work\. All AI\-suggested test cases were manually run and verified against expected outputs before inclusion\."
-
-Step 3 — Place this declaration in the location specified by the institution \(commonly a dedicated section at the end of the report, or a footnote on the title page\)\.
-
-
+**Model AI-Usage Declaration (for lab report end-matter):**
+> *"AI Tool Used: Claude (Anthropic). Purpose: (1) Brainstorming additional edge-case test inputs (e.g., empty input, negative numbers) for the sorting program in Section 3; (2) Grammar and spelling check of the final report text. Extent: No code logic or analysis was AI-generated; all algorithm design, implementation, and result interpretation are the student's own work. All AI-suggested test cases were manually run and verified against expected outputs before inclusion."*
 
 </details>
 
 __*Key Concepts Applied*__
 
-- The declaration follows the principle from Section 5\.2: disclosure must state which tool, for what purpose, and to what extent — a vague 'AI was used' statement is insufficient\.
-- Explicitly confirming manual verification of AI\-suggested test cases demonstrates the student retained ownership and understanding of the final submitted work\.
+- The declaration follows the principle from Section 5.2: disclosure must state which tool, for what purpose, and to what extent — a vague 'AI was used' statement is insufficient.
+- Explicitly confirming manual verification of AI-suggested test cases demonstrates the student retained ownership and understanding of the final submitted work.
 
 <details>
 
 <summary><b>Expected Output</b></summary>
 
-
-A properly formatted AI\-usage declaration \(as shown\) attached to the submission, satisfying typical institutional academic\-integrity requirements for disclosed AI assistance\.
-
-
+A properly formatted AI-usage declaration (as shown) attached to the submission, satisfying typical institutional academic-integrity requirements for disclosed AI assistance.
 
 </details>
 
@@ -131,38 +252,58 @@ A properly formatted AI\-usage declaration \(as shown\) attached to the submissi
 
 ### <a id="_Toc239678017"></a>Experiment 3: Checking Whether AI\-Generated Output Raises a Copyright/IP Concern
 
-Task: Walk through a worked example of checking whether AI\-generated text or image output raises a copyright/IP concern \(e\.g\., close paraphrasing of a source\)\.
+Task: Walk through a worked example of checking whether AI-generated text or image output raises a copyright/IP concern (e.g., close paraphrasing of a source).
 
 <details>
 
-<summary><b>Worked Solution</b></summary>
+<summary><b>Worked Solution — Copyright & IP Assessment Protocol</b></summary>
+
+Scenario: A student asks an AI tool to "explain Newton's laws of motion for a school project" and receives a paragraph. Before using it, the student conducts this three-tier check:
 
 
-Scenario: A student asks an AI tool to "explain Newton's laws of motion for a school project" and receives a paragraph\. Before using it, the student checks it for two separate concerns\.
-
-Concern check 1 — Close paraphrasing of a specific known source: Newton's laws are centuries\-old, foundational public knowledge explained in virtually every physics textbook; a generic explanation of them, in the AI's own generated wording, does not closely paraphrase any single identifiable, copyrighted source, so this is low risk\. \(Contrast this with asking the AI to 'explain the plot of a specific 2024 novel in detail' — a much higher risk of reproducing that specific author's protected creative expression\.\)
-
-Concern check 2 — Verbatim overlap test: the student takes a distinctive 10\-15 word phrase from the AI's output and searches for it online \(search\-engine spot\-check\)\. If an identical or near\-identical sentence appears verbatim in a specific existing textbook or website, this signals the model may have reproduced that source too closely, and the phrase should be reworded in the student's own words before submission\.
-
-Concern check 3 \(for an AI\-generated image, if one were requested\): checking whether the image closely resembles a specific existing copyrighted character, logo, or artwork \(e\.g\., asking for 'a diagram in the exact visual style of a specific textbook figure'\) — such prompts raise IP risk and should be avoided or the output should be substantially modified\.
-
-
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>IP Check Dimension</th>
+      <th>Risk Evaluation Criteria</th>
+      <th>Assessment & Recommended Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Foundational Knowledge Test</strong></td>
+      <td>Is the content standard public-domain scientific knowledge (e.g., Newton's Laws)?</td>
+      <td><strong>Low Risk</strong>: General scientific principles belong to the public domain and cannot be copyrighted.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Verbatim Overlap Search</strong></td>
+      <td>Does a search of a 10–15 word phrase return an exact match with an existing publication?</td>
+      <td><strong>Medium/High Risk</strong>: If matching text appears online, rephrase in your own words before submission.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Visual / Character Mimicry</strong></td>
+      <td>Does generated artwork mimic a trademarked character, logo, or distinct artist style?</td>
+      <td><strong>High Risk</strong>: Avoid prompts mimicking copyrighted intellectual properties; create original compositions.</td>
+    </tr>
+  </tbody>
+</table>
 
 </details>
 
 __*Key Concepts Applied*__
 
-- Section 5\.4's distinction between generic, foundational knowledge \(low IP risk\) and content closely tied to a single specific, identifiable, protected source \(higher IP risk\)\.
-- A simple verbatim\-phrase search is a fast, practical spot\-check any student can perform without legal training\.
+- Section 5.4's distinction between generic, foundational knowledge (low IP risk) and content closely tied to a single specific, identifiable, protected source (higher IP risk).
+- A simple verbatim-phrase search is a fast, practical spot-check any student can perform without legal training.
 
 <details>
 
 <summary><b>Expected Output</b></summary>
 
-
-A short checklist\-style note confirming: \(1\) topic is generic/foundational knowledge — low risk; \(2\) spot\-checked phrase\(s\) did not return an exact verbatim match online — no reproduction concern found; \(3\) content is safe to use with normal citation practice\.
-
-
+A short checklist-style note confirming: (1) topic is generic/foundational knowledge — low risk; (2) spot-checked phrase(s) did not return an exact verbatim match online — no reproduction concern found; (3) content is safe to use with normal citation practice.
 
 </details>
 
@@ -174,57 +315,171 @@ A short checklist\-style note confirming: \(1\) topic is generic/foundational kn
 
 ### <a id="_Toc239678018"></a>Experiment 4: Identify and Document a Hallucination or Bias Instance
 
-Problem: Identify and document a hallucination or bias instance produced by an AI tool on a factual query\.
+Problem: Identify and document a hallucination or bias instance produced by an AI tool on a factual query.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-1. Pose a factual query likely to expose a hallucination risk, e\.g\., a query about a very recent event, a niche statistic, or a request for an exact numeric figure with a citation: "What was the exact population of \[a specific small town\] according to the most recent census, and cite the source page?"
-2. Record the AI's answer, including any specific number and any cited source\.
-3. Independently verify the number against the actual official census source \(e\.g\., the relevant government statistics website\)\.
-4. Document the outcome: either the number matched \(no hallucination found on this attempt — note that a diligent student should keep trying representative queries until an instance is found, or report a near\-miss such as an outdated figure\), or the number/citation did not match, in which case document the exact discrepancy \(claimed value vs verified value\) and the likely cause \(outdated training data, or fabricated specificity\)\.
+1. Pose a factual query likely to expose a hallucination risk, e.g., a query about a very recent event, a niche statistic, or a request for an exact numeric figure with a citation: *"What was the exact population of [a specific small town] according to the most recent census, and cite the source page?"*
+2. Record the AI's answer, including any specific number and any cited source.
+3. Independently verify the number against the actual official census source (e.g., the relevant government statistics website).
+4. Document the investigation outcomes using this reporting template:
+
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Investigation Step</th>
+      <th>Field / Query Attribute</th>
+      <th>Observation Recorded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Test Prompt Posed</strong></td>
+      <td>Specific local census query</td>
+      <td><code>"What was the exact population of Vadlamudi, Guntur District in the 2011 census? Cite page."</code></td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>AI-Reported Claim</strong></td>
+      <td>Claimed numeric figure & source</td>
+      <td>AI reports exact population count and invents a specific census report volume/page.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Authoritative Verification</strong></td>
+      <td>Official Government Census record</td>
+      <td>Directorate of Census Operations Andhra Pradesh official portal.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Discrepancy & Diagnosis</strong></td>
+      <td>Comparison outcome</td>
+      <td>Number was either estimated or page number was fabricated (confirmed hallucination).</td>
+    </tr>
+  </tbody>
+</table>
 
 __*Explanation of Approach*__
 
-The instructive value of this exercise lies in the verification process itself, not merely in 'catching the AI out' — a student who diligently checks a fact and finds it correct has still practised the exact skill \(independent verification\) that Section 5\.1 requires, even without discovering an error\.
+The instructive value of this exercise lies in the verification process itself, not merely in 'catching the AI out' — a student who diligently checks a fact and finds it correct has still practised the exact skill (independent verification) that Section 5.1 requires, even without discovering an error.
 
 <br/>
 <PromptSandbox initialPrompt="What was the exact population of the town of Vadlamudi, Guntur District, Andhra Pradesh according to the most recent census? Please cite the official source document and page number." />
+
 ### <a id="_Toc239678019"></a>Experiment 5: Draft an AI\-Usage Declaration for a Hypothetical Assignment
 
-Problem: Draft an 'AI usage declaration' for a hypothetical assignment, citing tools and extent of use appropriately\.
+Problem: Draft an 'AI usage declaration' for a hypothetical assignment, citing tools and extent of use appropriately.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-Hypothetical assignment: a term paper on 'Applications of Machine Learning in Healthcare'\.
+Hypothetical assignment: a term paper on 'Applications of Machine Learning in Healthcare'.
 
-__Model AI\-Usage Declaration:__
+**Formal Declaration Template Breakdown:**
 
-"AI Tools Used: \(1\) Perplexity — used to locate 4 recent peer\-reviewed sources on ML in medical diagnosis, all subsequently read and cited directly from the original papers, not from the AI's summary\. \(2\) Grammarly — used for grammar and clarity editing of the final draft only, after all content and arguments were written independently\. No AI tool was used to generate the paper's arguments, analysis, or conclusions; all cited sources were read in full by the author before inclusion\."
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Declaration Field</th>
+      <th>Detailed Assignment Scope</th>
+      <th>Author Commitment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Tools Consulted</strong></td>
+      <td>Perplexity AI (literature search) & Grammarly (copy-editing)</td>
+      <td>Only tools declared here were employed during the project.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Literature Discovery</strong></td>
+      <td>Located 4 recent peer-reviewed sources on ML diagnostics</td>
+      <td>All cited papers were accessed and read in full by the author.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Editing Assistance</strong></td>
+      <td>Polished grammar, clarity, and phrasing in the final draft</td>
+      <td>No content, clinical arguments, or conclusions were generated by AI.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Integrity Certification</strong></td>
+      <td>Complete student intellectual ownership</td>
+      <td>Final paper reflects the author's original analysis and synthesis.</td>
+    </tr>
+  </tbody>
+</table>
+
+**Model AI-Usage Declaration:**
+> *"AI Tools Used: (1) Perplexity — used to locate 4 recent peer-reviewed sources on ML in medical diagnosis, all subsequently read and cited directly from the original papers, not from the AI's summary. (2) Grammarly — used for grammar and clarity editing of the final draft only, after all content and arguments were written independently. No AI tool was used to generate the paper's arguments, analysis, or conclusions; all cited sources were read in full by the author before inclusion."*
 
 __*Explanation of Approach*__
 
-Following the format established in Practical Example 2 \(tool, purpose, extent, verification\), this declaration draws a clear line between AI\-assisted research discovery/editing \(acceptable, disclosed\) and the actual intellectual content of the paper \(entirely the student's own\), which is the central distinction most institutional AI\-use policies are built around\.
+Following the format established in Practical Example 2 (tool, purpose, extent, verification), this declaration draws a clear line between AI-assisted research discovery/editing (acceptable, disclosed) and the actual intellectual content of the paper (entirely the student's own), which is the central distinction most institutional AI-use policies are built around.
 
 <br/>
 <PromptSandbox initialPrompt="Draft an AI-usage declaration for a term paper on 'Applications of Machine Learning in Healthcare'. I used (1) Perplexity to locate 4 recent peer-reviewed sources, and (2) Grammarly to edit grammar in the final draft. I wrote all arguments and analysis myself, and read all cited papers in full. Follow the format: Tools Used, Purpose, Extent, Verification." />
 
 ### <a id="_Toc239678020"></a>Experiment 6: Review an AI Tool's Data\-Handling Policy for DPDP Act Compliance
 
-Problem: Review the data\-handling/privacy policy of one AI tool used in this course and identify one DPDP Act, 2023 compliance consideration relevant to student data\.
+Problem: Review the data-handling/privacy policy of one AI tool used in this course and identify one DPDP Act, 2023 compliance consideration relevant to student data.
 
-__*Step\-by\-Step Solution*__
+__*Step-by-Step Solution*__
 
-1. Locate the chosen AI tool's official privacy policy page \(typically linked in account settings or the company website footer\)\.
-2. Search specifically for sections addressing: what data is collected, whether conversations/uploads are used for model training, data retention duration, and whether users can request deletion of their data\.
-3. Map these findings onto DPDP Act principles introduced in Section 5\.3: consent, purpose limitation, data minimisation, and the Data Principal's right to access/erasure\.
+1. Locate the chosen AI tool's official privacy policy page (typically linked in account settings or the company website footer).
+2. Search specifically for sections addressing: what data is collected, whether conversations/uploads are used for model training, data retention duration, and whether users can request deletion of their data.
+3. Map these findings onto DPDP Act principles using this compliance audit checklist:
 
-__*Sample Finding \(illustrative, for grading reference\)*__
+
+<table>
+  <thead>
+    <tr>
+      <th style={{ textAlign: "center", width: "80px" }}>Sl. No.</th>
+      <th>Compliance Dimension</th>
+      <th>Policy Clause to Investigate</th>
+      <th>Student Compliance Assessment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>1</td>
+      <td><strong>Model Training on Uploads</strong></td>
+      <td>Does the vendor use uploaded data to train future models?</td>
+      <td>Verify if training opt-out exists; disable data-sharing before uploading datasets.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>2</td>
+      <td><strong>Data Retention Duration</strong></td>
+      <td>How long are prompts, uploaded files, and chats retained on servers?</td>
+      <td>Ensure sensitive institutional files are deleted after the lab session.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>3</td>
+      <td><strong>Right to Erasure</strong></td>
+      <td>Does the tool provide an explicit 'Delete Account' and 'Delete History' feature?</td>
+      <td>Satisfies DPDP Data Principal rights to data removal.</td>
+    </tr>
+    <tr>
+      <td style={{ textAlign: "center", fontWeight: "bold" }}>4</td>
+      <td><strong>Third-Party Data Transfers</strong></td>
+      <td>Does the policy permit selling or sharing user data with external vendors?</td>
+      <td>Confirm that no student personal identifiable information (PII) is transferred.</td>
+    </tr>
+  </tbody>
+</table>
+
+**Sample Finding (Illustrative, for grading reference):**
 
 __Example compliance consideration:__
-
-"Tool X's privacy policy states that uploaded files may be used to improve its models unless the user opts out in settings\. Under the DPDP Act's data\-minimisation and purpose\-limitation principles, this means student data \(e\.g\., a classmate's marks in a shared dataset\) should not be uploaded to this tool without first turning off the training\-data\-sharing option, or without obtaining consent from everyone identifiable in the dataset, since the original purpose \(a classroom exercise\) does not extend to that data being reused to train a third\-party company's future models\."
+> *"Tool X's privacy policy states that uploaded files may be used to improve its models unless the user opts out in settings. Under the DPDP Act's data-minimisation and purpose-limitation principles, this means student data (e.g., a classmate's marks in a shared dataset) should not be uploaded to this tool without first turning off the training-data-sharing option, or without obtaining consent from everyone identifiable in the dataset, since the original purpose (a classroom exercise) does not extend to that data being reused to train a third-party company's future models."*
 
 __*Explanation of Approach*__
 
-This exercise requires the student to actually read a real, current privacy policy rather than assume its contents, then connect specific clauses to specific legal principles — reinforcing that data\-privacy compliance in Section 5\.3 is a concrete, checkable practice, not an abstract concern\.
-
+This exercise requires the student to actually read a real, current privacy policy rather than assume its contents, then connect specific clauses to specific legal principles — reinforcing that data-privacy compliance in Section 5.3 is a concrete, checkable practice, not an abstract concern.
